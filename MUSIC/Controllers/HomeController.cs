@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MUSIC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,11 @@ namespace MUSIC.Controllers
 {
     public class HomeController : Controller
     {
+        private DbContent db = new DbContent();
         public ActionResult Index()
         {
-            return View();
+
+            return View(db.BAIHATs.ToList());
         }
 
         public ActionResult About()
