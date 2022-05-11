@@ -13,20 +13,25 @@ namespace MUSIC.Models
         public THELOAI()
         {
             BAIHATs = new HashSet<BAIHAT>();
-            VIDEOs = new HashSet<VIDEO>();
         }
 
         [Key]
-        public int MaTL { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int idtheloai { get; set; }
+
+        public int? idchude { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string TenTL { get; set; }
+        public string tentheloai { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string hinhtheloai { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BAIHAT> BAIHATs { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VIDEO> VIDEOs { get; set; }
+        public virtual CHUDE CHUDE { get; set; }
     }
 }

@@ -9,29 +9,37 @@ namespace MUSIC.Models
     [Table("BAIHAT")]
     public partial class BAIHAT
     {
-        public int Id { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int idbaihat { get; set; }
 
-        [Column(TypeName = "text")]
-        public string URLBaiHat { get; set; }
+        public int? idtheloai { get; set; }
 
-        [Column(TypeName = "ntext")]
-        public string TenBH { get; set; }
+        public int? idalbum { get; set; }
 
+        public int? id { get; set; }
+
+        public int? idplaylist { get; set; }
+
+        [Required]
         [StringLength(50)]
-        public string CaSi { get; set; }
+        public string tenbaihat { get; set; }
 
-        public int? MaTL { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string hinhbaihat { get; set; }
 
-        [StringLength(100)]
-        public string TacGia { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string casi { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? NgayCapNhat { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string linkbaihat { get; set; }
 
-        [Column(TypeName = "ntext")]
-        public string LoiBaiHat { get; set; }
+        public virtual ALBUM ALBUM { get; set; }
 
-        public int? LuotXemBaiHat { get; set; }
+        public virtual PLAYLIST PLAYLIST { get; set; }
 
         public virtual THELOAI THELOAI { get; set; }
     }

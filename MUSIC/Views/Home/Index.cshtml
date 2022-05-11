@@ -1,4 +1,10 @@
-﻿<div id="ttr_content_and_sidebar_container">
+﻿@model IEnumerable <MUSIC.Models.BAIHAT>
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="ttr_content_and_sidebar_container">
     <div id="ttr_content">
         <div id="ttr_content_margin" class="container-fluid">
             <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
@@ -13,36 +19,23 @@
                         <div style="clear:both;"></div>
                     </div>
                 </div>
-                <div class="clearfix visible-lg-block visible-sm-block visible-md-block visible-xs-block">
-                </div>
-                <div class="post_column col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div class="ttr_Home_html_column01">
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div class="html_content"><p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 2.14em 0em;"><span><img class="ttr_uniform" src="~/images/theloainhac/nhactre.png" style="max-width:380px;max-height:250px;" /></span></span><span style="font-family:'Oxygen','Arial';font-weight:700;font-size:1.714em;">Nhạc trẻ</span></p></div>
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div style="clear:both;"></div>
+                @foreach (var item in Model)
+                {
+                    <div class="clearfix visible-lg-block visible-sm-block visible-md-block visible-xs-block">
                     </div>
-                </div>
-                <div class="clearfix visible-xs-block">
-                </div>
-                <div class="post_column col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div class="ttr_Home_html_column02">
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div class="html_content"><p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 2.14em 0em;"><span><img class="ttr_uniform" src="~/images/theloainhac/bolero.png" style="max-width:380px;max-height:250px;" /></span></span><span style="font-family:'Oxygen','Arial';font-weight:700;font-size:1.714em;">Nhạc Bolero</span></p></div>
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div style="clear:both;"></div>
+                    <div class="post_column col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="ttr_Home_html_column01">
+                            <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
+                            <div class="html_content"><p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 2.14em 0em;"><span><img class="ttr_uniform" src="@item.THELOAI.hinhtheloai" style="max-width:380px;max-height:250px;" /></span></span><span style="font-family:'Oxygen','Arial';font-weight:700;font-size:1.714em;">@item.THELOAI.tentheloai</span></p></div>
+                            <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
+                            <div style="clear:both;"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="clearfix visible-xs-block">
-                </div>
-                <div class="post_column col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div class="ttr_Home_html_column03">
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div class="html_content"><p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 2.14em 0em;"><span><img class="ttr_uniform" src="~/images/theloainhac/rap.png" style="max-width:380px;max-height:250px;" /></span></span><span style="font-family:'Oxygen','Arial';font-weight:700;font-size:1.714em;">Nhạc rap</span></p></div>
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div style="clear:both;"></div>
+                    <div class="clearfix visible-xs-block">
                     </div>
-                </div>
+                }
+
+
                 <div class="clearfix visible-lg-block visible-sm-block visible-md-block visible-xs-block">
                 </div>
             </div>
@@ -57,64 +50,31 @@
                         <div style="clear:both;"></div>
                     </div>
                 </div>
-                <div class="clearfix visible-lg-block visible-sm-block visible-md-block visible-xs-block">
-                </div>
-                <div class="post_column col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="ttr_Home_html_column11">
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div class="html_content">
-                            <p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 2.14em 0em;"><span><img class="ttr_uniform" src="~/images/nhacsi/denvau.png" style="max-width:128px;max-height:128px;" /></span></span><span style="font-family:'Oxygen','Arial';font-weight:700;font-size:1.857em;color:rgba(45,45,45,1);">Đen Vâu</span></p>
-                            <p style="margin:1.43em 0em 0.36em 0em;text-align:Center;line-height:1.54929577464789;">
-                                <span>
-                                    <a HREF="#" target="_self" class="btn btn-md btn-default">read more</a>
-                                </span>
-                            </p>
-                        </div>
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div style="clear:both;"></div>
+
+                @foreach (var item in Model)
+                {
+                    <div class="clearfix visible-lg-block visible-sm-block visible-md-block visible-xs-block">
                     </div>
-                </div>
-                <div class="clearfix visible-xs-block">
-                </div>
-                <div class="post_column col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="ttr_Home_html_column12">
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div class="html_content">
-                            <p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 2.14em 0em;"><span><img class="ttr_uniform" src="~/images/nhacsi/septung.png" style="max-width:128px;max-height:128px;" /></span></span><span style="font-family:'Oxygen','Arial';font-weight:700;font-size:1.857em;color:rgba(45,45,45,1);">Sơn Tùng MTP</span></p>
-                            <p style="margin:1.43em 0em 0.36em 0em;text-align:Center;line-height:1.54929577464789;"><span><a HREF="#" target="_self" class="btn btn-md btn-default">read more</a></span></p>
+                    <div class="post_column col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="ttr_Home_html_column11">
+                            <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
+                            <div class="html_content">
+                                <p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 2.14em 0em;"><span><img class="ttr_uniform" src="@item.PLAYLIST.hinhnen" style="max-width:128px;max-height:128px;" /></span></span><span style="font-family:'Oxygen','Arial';font-weight:700;font-size:1.857em;color:rgba(45,45,45,1);">@item.PLAYLIST.ten</span></p>
+                                <p style="margin:1.43em 0em 0.36em 0em;text-align:Center;line-height:1.54929577464789;">
+                                    <span>
+                                        <a HREF="#" target="_self" class="btn btn-md btn-default">read more</a>
+                                    </span>
+                                </p>
+                            </div>
+                            <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
+                            <div style="clear:both;"></div>
                         </div>
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div style="clear:both;"></div>
                     </div>
-                </div>
-                <div class="clearfix visible-sm-block visible-md-block visible-xs-block">
-                </div>
-                <div class="post_column col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="ttr_Home_html_column13">
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div class="html_content">
-                            <p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 2.14em 0em;"><span><img class="ttr_uniform" src="~/images/nhacsi/idol.png" style="max-width:128px;max-height:128px;" /></span></span><span style="font-family:'Oxygen','Arial';font-weight:700;font-size:1.857em;color:rgba(45,45,45,1);">Rose</span></p>
-                            <p style="margin:1.43em 0em 0.36em 0em;text-align:Center;line-height:1.54929577464789;"><span><a HREF="#" target="_self" class="btn btn-md btn-default">read more</a></span></p>
-                        </div>
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div style="clear:both;"></div>
+                    <div class="clearfix visible-xs-block">
                     </div>
-                </div>
-                <div class="clearfix visible-xs-block">
-                </div>
-                <div class="post_column col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                    <div class="ttr_Home_html_column14">
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div class="html_content">
-                            <p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 2.14em 0em;"><span><img class="ttr_uniform" src="~/images/nhacsi/lord.png" style="max-width:128px;max-height:128px;" /></span></span><span style="font-family:'Oxygen','Arial';font-weight:700;font-size:1.857em;color:rgba(45,45,45,1);">Lỉngard</span></p>
-                            <p style="margin:1.43em 0em 0.36em 0em;text-align:Center;line-height:1.54929577464789;"><span><a HREF="#" target="_self" class="btn btn-md btn-default">read more</a></span></p>
-                        </div>
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div style="clear:both;"></div>
-                    </div>
-                </div>
-                <div class="clearfix visible-lg-block visible-sm-block visible-md-block visible-xs-block">
-                </div>
+                }
+
+
             </div>
             <div class="ttr_Home_html_row3 row">
                 <div class="post_column col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -127,68 +87,25 @@
                         <div style="clear:both;"></div>
                     </div>
                 </div>
-                <div class="clearfix visible-lg-block visible-sm-block visible-md-block visible-xs-block">
-                </div>
-                <div class="post_column col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <div class="ttr_Home_html_column31">
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div class="html_content"><p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 0em 0em;"><span><img class="ttr_uniform" src="~/images/music/chibi.jpg" style="max-width:350px;max-height:233px;" /></span></span></p></div>
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div style="clear:both;"></div>
+                @foreach (var item in Model)
+                {
+                    <div class="clearfix visible-lg-block visible-sm-block visible-md-block visible-xs-block">
                     </div>
-                </div>
-                <div class="clearfix visible-xs-block">
-                </div>
-                <div class="post_column col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <div class="ttr_Home_html_column32">
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div class="html_content"><p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 0em 0em;"><span><img class="ttr_uniform" src="~/images/music/ducphuc.jpg" style="max-width:350px;max-height:233px;" /></span></span></p></div>
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div style="clear:both;"></div>
+                    <div class="post_column col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <div class="ttr_Home_html_column31">
+                            <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
+                            <div class="html_content"><p style="text-align:Center;">
+                                <span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 0em 0em;"><span>
+                                    <img class="ttr_uniform" src="@item.hinhbaihat" style="max-width:350px;max-height:233px;" /></span></span></p>
+                            </div>
+                            <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
+                            <div style="clear:both;"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="clearfix visible-sm-block visible-md-block visible-xs-block">
-                </div>
-                <div class="post_column col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <div class="ttr_Home_html_column33">
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div class="html_content"><p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 0em 0em;"><span><img class="ttr_uniform" src="~/images/music/jeytee.jpg" style="max-width:350px;max-height:233px;" /></span></span></p></div>
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div style="clear:both;"></div>
+                    <div class="clearfix visible-xs-block">
                     </div>
-                </div>
-                <div class="clearfix visible-lg-block visible-xs-block">
-                </div>
-                <div class="post_column col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <div class="ttr_Home_html_column34">
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div class="html_content"><p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 0em 0em;"><span><img class="ttr_uniform" src="~/images/music/minzy.jpg" style="max-width:350px;max-height:233px;" /></span></span></p></div>
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div style="clear:both;"></div>
-                    </div>
-                </div>
-                <div class="clearfix visible-sm-block visible-md-block visible-xs-block">
-                </div>
-                <div class="post_column col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <div class="ttr_Home_html_column35">
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div class="html_content"><p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 0em 0em;"><span><img class="ttr_uniform" src="~/images/music/phuongly.jpg" style="max-width:350px;max-height:233px;" /></span></span></p></div>
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div style="clear:both;"></div>
-                    </div>
-                </div>
-                <div class="clearfix visible-xs-block">
-                </div>
-                <div class="post_column col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <div class="ttr_Home_html_column36">
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div class="html_content"><p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 0em 0em;"><span><img class="ttr_uniform" src="~/images/music/sep.jpg" style="max-width:350px;max-height:233px;" /></span></span></p></div>
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div style="clear:both;"></div>
-                    </div>
-                </div>
-                <div class="clearfix visible-lg-block visible-sm-block visible-md-block visible-xs-block">
-                </div>
+                }
+
             </div>
             <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
         </div>

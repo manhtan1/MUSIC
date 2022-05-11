@@ -637,7 +637,7 @@ label {
 }
 
 .Projects header#ttr_header {
-    background: url(~images/nen.jpg);
+    background: url(images/nen.jpg);
     background-color: #06895F;
     background-repeat: no-repeat;
     background-size: cover;
@@ -1823,7 +1823,7 @@ label {
 }
 
 .Services header#ttr_header {
-    background: url(~images/nen.jpg);
+    background: url(images/ServicesDesktopheader.jpg);
     background-color: #039B68;
     background-repeat: no-repeat;
     background-size: cover;
@@ -2681,7 +2681,7 @@ label {
 }
 
 .Contact header#ttr_header {
-    background: url(~images/nen.jpg);
+    background: url(images/ContactDesktopheader.jpg);
     background-color: #169D74;
     background-repeat: no-repeat;
     background-size: cover;
@@ -4027,7 +4027,7 @@ label {
 }
 
 .About-Us header#ttr_header {
-    background: url(~images/nen.jpg.jpg);
+    background: url(images/About-UsDesktopheader.jpg);
     background-color: #039B68;
     background-repeat: no-repeat;
     background-size: cover;
@@ -6623,7 +6623,7 @@ ul.navbar-nav .dropdown-menu, ul.navbar-nav .sub-menu, ul.navbar-nav .collapse l
 }
 
 header#ttr_header {
-    background: url(~images/nen.jpg);
+    background: url(~/images/nen.jpg);
     background-color: #FFFFFF;
     background-repeat: no-repeat;
     background-position: Center Center;

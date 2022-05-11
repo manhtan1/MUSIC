@@ -9,7 +9,7 @@ namespace MUSIC.Controllers
 {
     public class HomeController : Controller
     {
-        private DbContent db = new DbContent();
+        private DBcontent db = new DBcontent();
         public ActionResult Index()
         {
 

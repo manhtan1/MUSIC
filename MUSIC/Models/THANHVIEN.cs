@@ -9,12 +9,6 @@ namespace MUSIC.Models
     [Table("THANHVIEN")]
     public partial class THANHVIEN
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public THANHVIEN()
-        {
-            YEUCAUs = new HashSet<YEUCAU>();
-        }
-
         [StringLength(50)]
         public string HoTen { get; set; }
 
@@ -52,10 +46,5 @@ namespace MUSIC.Models
 
         [StringLength(50)]
         public string CauTraLoi { get; set; }
-
-        public int? QuyenAdmin { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<YEUCAU> YEUCAUs { get; set; }
     }
 }
