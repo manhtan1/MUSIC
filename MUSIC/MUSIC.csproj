@@ -161,13 +161,14 @@
     <Content Include="Assetss\Customer\js\navigation.js" />
     <Content Include="Assetss\Customer\js\respond.min.js" />
     <Content Include="Assetss\Customer\js\totop.js" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\responsive.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\flexslider-icon.svg" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\chude\chudedatnuoc.png" />
     <Content Include="images\chude\chudethieunhi.png" />
@@ -215,20 +216,12 @@
     <Content Include="music\tuibagang.mp3" />
     <Content Include="music\vimeconngoan.mp3" />
     <Content Include="music\vonguoita.mp3" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Assetss\Customer\fonts\glyphicons-halflings-regular.ttf" />
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\jquery-1.11.3.min.js" />
+    <Content Include="Scripts\modernizr.js" />
+    <Content Include="Scripts\scripts.js" />
+    <Content Include="Scripts\sidemenu.js" />
+    <Content Include="Scripts\waypoints.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -249,17 +242,31 @@
     <Folder Include="Assetss\Customer\images\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="fonts\flexslider-icon.eot" />
+    <Content Include="fonts\flexslider-icon.ttf" />
+    <Content Include="fonts\flexslider-icon.woff" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\LobsterTwo-Bold.ttf" />
+    <Content Include="fonts\LobsterTwo-BoldItalic.ttf" />
+    <Content Include="fonts\LobsterTwo-Italic.ttf" />
+    <Content Include="fonts\LobsterTwo-Regular.ttf" />
+    <Content Include="fonts\SourceSansPro-Black.ttf" />
+    <Content Include="fonts\SourceSansPro-BlackItalic.ttf" />
+    <Content Include="fonts\SourceSansPro-Bold.ttf" />
+    <Content Include="fonts\SourceSansPro-BoldItalic.ttf" />
+    <Content Include="fonts\SourceSansPro-ExtraLight.ttf" />
+    <Content Include="fonts\SourceSansPro-ExtraLightItalic.ttf" />
+    <Content Include="fonts\SourceSansPro-Italic.ttf" />
+    <Content Include="fonts\SourceSansPro-Light.ttf" />
+    <Content Include="fonts\SourceSansPro-LightItalic.ttf" />
+    <Content Include="fonts\SourceSansPro-Regular.ttf" />
+    <Content Include="fonts\SourceSansPro-Semibold.ttf" />
+    <Content Include="fonts\SourceSansPro-SemiboldItalic.ttf" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

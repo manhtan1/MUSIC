@@ -3,135 +3,148 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title>@ViewData["Title"] - NHACMOI</title>
-    <script type="text/javascript" src="~/Scripts/bootstrap.min.js">
-    </script>
-    <script type="text/javascript" src="~/Scripts/contactform.js">
-    </script>
-    <script type="text/javascript" src="~/Scripts/Customjs.js">
-    </script>
-    <script type="text/javascript" src="~/Scripts/height.js">
-    </script>
-    <script type="text/javascript" src="~/Scripts/html5shiv.js">
-    </script>
-    <script type="text/javascript" src="~/Scripts/jquery-ui.min.js">
-    </script>
-    <script type="text/javascript" src="~/Scripts/jquery.js">
-    </script>
-    <script type="text/javascript" src="~/Scripts/navigation.js">
-    </script>
-    <script type="text/javascript" src="~/Scripts/respond.min.js">
-    </script>
-    <script type="text/javascript" src="~/Scripts/totop.js">
-    </script>
+    <link href='https://fonts.googleapis.com/css?family=Lobster+Two:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300,700' rel='stylesheet' type='text/css' />
+
+    <!--MOBILE DEVICE-->
+
     <link rel="stylesheet" href="~/Content/bootstrap.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="~/Content/style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/Content/font-awesome.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/Content/animate.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/Content/responsive.css" type="text/css" media="screen" />
+
+    <!--JS-->
+    
+    <script type="text/javascript" src="~/Scripts/jquery-1.11.3.min.js">
+    </script>
+    <script type="text/javascript" src="~/Scripts/modernizr.js">
+    </script>
+    <script type="text/javascript" src="~/Scripts/scripts.js">
+    </script>
+    <script type="text/javascript" src="~/Scripts/waypoints.min.js">
+    </script>
 
 </head>
-<body class="Home">
-    <div class="totopshow">
-        <a href="#" class="back-to-top"><img alt="Back to Top" src="images/gototop0.png" /></a>
-    </div>
-    <div id="ttr_page" class="container">
-        <nav id="ttr_menu" class="navbar-default navbar">
-            <div id="ttr_menu_inner_in">
-                <div class="menuforeground">
-                </div>
-                <div id="navigationmenu">
-                    <div class="navbar-header">
-                        <button id="nav-expander" data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
-                            <span class="sr-only">
-                            </span>
-                            <span class="icon-bar">
-                            </span>
-                            <span class="icon-bar">
-                            </span>
-                            <span class="icon-bar">
-                            </span>
-                        </button>
-                        <a href="http://www.templatetoaster.com" target="_self">
-                            <img class="ttr_menu_logo" src="~/images/logo.png">
-                        </a>
+<body>
+    <div class="se-pre-con"></div>
+    <section class="saction1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="menu">
+                        <div class="mobile-nav-container"> </div>
+                        <div class="mobile-nav-btn"><img class="nav-open" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6214/nav-open.png" alt="Nav Button Open" /> <img class="nav-close" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6214/nav-close.png" alt="Nav Button Close" /> </div>
+                        <nav>
+                            <ul>
+                                <li><a href="#home">Trang chủ</a></li>
+                                <li><a href="#resturant">Product</a></li>
+                                <li><a href="#offer">Nghệ sĩ</a></li>
+                                <li><a href="#contact">Liên hệ</a></li>
+                            </ul>
+                        </nav>
                     </div>
-                    <div class="menu-center collapse navbar-collapse">
-                        <ul class="ttr_menu_items nav navbar-nav navbar-right">
-                            <li class="ttr_menu_items_parent dropdown active">
-                                <a href="home.html" class="ttr_menu_items_parent_link_active"><span class="menuchildicon"></span>Home</a>
-                                <hr class="horiz_separator" />
-                            </li>
-                            <li class="ttr_menu_items_parent dropdown">
-                                <a href="about-us.html" class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>About Us</a>
-                                <hr class="horiz_separator" />
-                            </li>
-                            <li class="ttr_menu_items_parent dropdown">
-                                <a href="services.html" class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Services</a>
-                                <hr class="horiz_separator" />
-                            </li>
-                            <li class="ttr_menu_items_parent dropdown">
-                                <a href="projects.html" class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Projects</a>
-                                <hr class="horiz_separator" />
-                            </li>
-                            <li class="ttr_menu_items_parent dropdown">
-                                <a href="contact.html" class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Contact</a>
-                                <hr class="horiz_separator" />
-                            </li>
+                    <div class="login">
+                        <ul>
+                            <li><a href="#">Đăng nhập</a></li>
+                            <li><a href="#">Đăng kí</a></li>
+                            <li><a href="#">Trợ giúp</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </nav>
-        <header id="ttr_header" >
-            <div id="ttr_header_inner" style="background:url(~/images/nen.jpg) !important">
-                <div class="ttr_headershape01">
-                </div>
-        </header>
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-        <footer id="ttr_footer">
-            <div class="ttr_footer_bottom_footer">
-                <div class="ttr_footer_bottom_footer_inner">
-                    <div id="ttr_copyright">
-                        <a href="#">
-                            manhtanqhp@gmail.com
-                        </a>
-                    </div>
-                    <div id="ttr_footer_designed_by_links">
-                        <a href="http://templatetoaster.com" target="_self">
-                            Website
-                        </a>
-                        <span id="ttr_footer_designed_by">
-                            nghe nhạc
-                        </span>
-                    </div>
-                    <a href="http://www.facebook.com/TemplateToaster" class="ttr_footer_facebook" target="_self">
-                    </a>
-                    <a href="http://twitter.com/templatetoaster" class="ttr_footer_twitter" target="_self">
-                    </a>
-                    <a href="http://www.templatetoaster.com" class="ttr_footer_googleplus" target="_self">
-                    </a>
+        </div>
+    </section>
+    <section class="backgraound">
+        <div class="container">
+
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="textbox os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.5s">
                 </div>
             </div>
-        </footer>
-        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-bottom-collapse: separate;"></div>
-    </div>
-    <script type="text/javascript">
-        WebFontConfig = {
-            google: { families: ['Oleo+Script:700', 'Oxygen:700', 'Roboto:700', 'Oxygen'] }
-        };
-        (function () {
-            var wf = document.createElement('script');
-            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1.0.31/webfont.js';
-            wf.type = 'text/javascript';
-            wf.async = 'true';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(wf, s);
-        })();
+            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 50px;">
+                <div class="textbox1 os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.5s">
+                    <input type="text" placeholder="Tìm kiếm bài hát" />
+                    <span class="search"><a href="#"><i class="fa fa-search"></i></a></span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="textbox1 os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.5s">
+                </div>
+            </div>
+    </section>
+
+    @RenderBody()
+    <footer class="saction8">
+        <div class="container" id="contact">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="site">
+                        <h3>Liên kết trang web</h3>
+                    </div>
+                    <div class="sitelink">
+                        <ul>
+                            <li> <span>&#10152;</span><a href="#">Về chúng tôi</a></li>
+                            <li><span>&#10152;</span><a href="#">Liên hệ ngay</a></li>
+                            <li><span>&#10152;</span><a href="#">Chính sách bảo mật</a></li>
+                            <li><span>&#10152;</span><a href="#">Điều khoản sử dụng</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="site">
+                        <h3>Liên kết trang web</h3>
+                    </div>
+                    <div class="sitelink">
+                        <ul>
+                            <li> <span>&#10152;</span><a href="#">Về chúng tôi</a></li>
+                            <li><span>&#10152;</span><a href="#">Liên hệ ngay</a></li>
+                            <li><span>&#10152;</span><a href="#">Chính sách bảo mật</a></li>
+                            <li><span>&#10152;</span><a href="#">Điều khoản sử dụng</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="follow">
+                        <h3>theo dõi chúng tôi trên...</h3>
+                    </div>
+                    <div class="social">
+                        <ul>
+                            <li> <i class="fa fa-facebook-square"></i><a href="#">Facebook</a></li>
+                            <li><i class="fa fa-twitter-square"></i><a href="#">Twitter</a></li>
+                            <li><i class="fa fa-linkedin-square"></i><a href="#">Linkedin</a></li>
+                            <li><i class="fa fa-google-plus-square"></i><a href="#">Google Plus</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="submit">
+                        <h3>đăng kí mail</h3>
+                        <p>Để nhận được cập nhật mới nhất và các giao dịch thực phẩm hàng tuần</p>
+                    </div>
+                    <div class="submitbox">
+                        <input type="text" />
+                        <div class="sub"> <a href="#">Đăng kí</a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <footer class="saction9">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                    <p class="freetemplates">Đặng Thành Khá, Nguyễn Công Mạnh Tân</p>
+                    <p class="freetemplates">Đồ án cơ sở</p>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="~/Scripts/sidemenu.js">
     </script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

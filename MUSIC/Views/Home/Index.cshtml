@@ -1,115 +1,88 @@
-﻿@model IEnumerable <MUSIC.Models.BAIHAT>
+﻿@model IEnumerable<MUSIC.Models.BAIHAT>
 @{
     ViewBag.Title = "Trang chủ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="ttr_content_and_sidebar_container">
-    <div id="ttr_content">
-        <div id="ttr_content_margin" class="container-fluid">
-            <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-            <div class="ttr_Home_html_row0 row">
-                <div class="post_column col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="ttr_Home_html_column00">
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div class="html_content">
-                            <p style="text-align:Center;"><span style="font-family:'Oxygen','Calibri';font-weight:700;font-size:3.429em;color:rgba(0,128,34,1);">WELCOME !</span></p>
-                        </div>
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div style="clear:both;"></div>
-                    </div>
-                </div>
-                @foreach (var item in Model)
-                {
-                    <div class="clearfix visible-lg-block visible-sm-block visible-md-block visible-xs-block">
-                    </div>
-                    <div class="post_column col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="ttr_Home_html_column01">
-                            <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                            <div class="html_content"><p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 2.14em 0em;"><span><img class="ttr_uniform" src="@item.THELOAI.hinhtheloai" style="max-width:380px;max-height:250px;" /></span></span><span style="font-family:'Oxygen','Arial';font-weight:700;font-size:1.714em;">@item.THELOAI.tentheloai</span></p></div>
-                            <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                            <div style="clear:both;"></div>
-                        </div>
-                    </div>
-                    <div class="clearfix visible-xs-block">
-                    </div>
-                }
 
-
-                <div class="clearfix visible-lg-block visible-sm-block visible-md-block visible-xs-block">
+<section class="saction4">
+    <div class="container" id="offer">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="dotted3 os-animation" data-os-animation="bounceInLeft" data-os-animation-delay="1s"></div>
+                <div class="special">
+                    <h2 class="os-animation" data-os-animation="bounceInDown" data-os-animation-delay="0.50s">Nghệ Sĩ</h2>
+                    <div class="dotted4 os-animation" data-os-animation="bounceInRight" data-os-animation-delay="1s"></div>
                 </div>
             </div>
-            <div class="ttr_Home_html_row1 row">
-                <div class="post_column col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="ttr_Home_html_column10">
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div class="html_content">
-                            <p style="text-align:Center;"><span style="font-family:'Oxygen','Arial';font-weight:700;font-size:3.429em;color:rgba(3,155,104,1);">Nghệ sĩ</span></p>
-                        </div>
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div style="clear:both;"></div>
-                    </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="slider clearfix os-animation" data-os-animation="fadeInDown" data-os-animation-delay="0.20s">
+                <div class="imgplaylist clearfix"> <img src="~/images/nhacsi/septung.png" style="width:100%" alt="" /> </div>
+                <div class="title nameplaylist clearfix">
+                    <h3>
+                        Sơn Tùng MTP<br />
+                    </h3>
                 </div>
-
-                @foreach (var item in Model)
-                {
-                    <div class="clearfix visible-lg-block visible-sm-block visible-md-block visible-xs-block">
-                    </div>
-                    <div class="post_column col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="ttr_Home_html_column11">
-                            <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                            <div class="html_content">
-                                <p style="text-align:Center;"><span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 2.14em 0em;"><span><img class="ttr_uniform" src="@item.PLAYLIST.hinhnen" style="max-width:128px;max-height:128px;" /></span></span><span style="font-family:'Oxygen','Arial';font-weight:700;font-size:1.857em;color:rgba(45,45,45,1);">@item.PLAYLIST.ten</span></p>
-                                <p style="margin:1.43em 0em 0.36em 0em;text-align:Center;line-height:1.54929577464789;">
-                                    <span>
-                                        <a HREF="#" target="_self" class="btn btn-md btn-default">read more</a>
-                                    </span>
-                                </p>
-                            </div>
-                            <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                            <div style="clear:both;"></div>
-                        </div>
-                    </div>
-                    <div class="clearfix visible-xs-block">
-                    </div>
-                }
-
-
             </div>
-            <div class="ttr_Home_html_row3 row">
-                <div class="post_column col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="ttr_Home_html_column30">
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div class="html_content">
-                            <p style="margin:0.36em 0em 0.36em 0em;text-align:Center;"><span style="font-family:'Oxygen','Arial';font-weight:700;font-size:2.571em;color:rgba(3,155,104,1);">Products</span></p>
-                        </div>
-                        <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                        <div style="clear:both;"></div>
-                    </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="slider clearfix os-animation" data-os-animation="fadeInDown"  data-os-animation-delay="0.50s">
+                <div class="imgplaylist"> <img src="~/images/nhacsi/denvau.png" style="width:100%" alt="" /> </div>
+                <div class=" title nameplaylist">
+                    <h3>
+                        Đen Vâu<br />
+                    </h3>
                 </div>
-                @foreach (var item in Model)
-                {
-                    <div class="clearfix visible-lg-block visible-sm-block visible-md-block visible-xs-block">
-                    </div>
-                    <div class="post_column col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                        <div class="ttr_Home_html_column31">
-                            <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                            <div class="html_content"><p style="text-align:Center;">
-                                <span class="ttr_image" style="float:none;display:block;text-align:center;overflow:hidden;margin:0em 0em 0em 0em;"><span>
-                                    <img class="ttr_uniform" src="@item.hinhbaihat" style="max-width:350px;max-height:233px;" /></span></span></p>
-                            </div>
-                            <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
-                            <div style="clear:both;"></div>
-                        </div>
-                    </div>
-                    <div class="clearfix visible-xs-block">
-                    </div>
-                }
-
             </div>
-            <div style="height:0px;width:0px;overflow:hidden;-webkit-margin-top-collapse: separate;"></div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="slider clearfix os-animation" data-os-animation="fadeInDown"  data-os-animation-delay="1s">
+                <div class="imgplaylist"> <img src="~/images/nhacsi/phanmanhquynh.png" style="width:100%" alt="" /> </div>
+                <div class="title nameplaylist">
+                    <h3>
+                        Phan Mạnh Quỳnh<br />
+                    </h3>
+                </div>
+            </div>
         </div>
     </div>
-    <div style="clear:both">
+</section>
+<section class="saction5">
+    <div class="container" id="resturant">
+        <!---col-->
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="special">
+                <h2 class="os-animation" data-os-animation="bounceInDown" data-os-animation-delay="0.05s">Product</h2>
+            </div>
+            <div class="food1">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6" style="padding:0 5px">
+                            <figure class="food os-animation" data-os-animation="fadeInDown" data-os-animation-delay="3s">
+                                <img src="@item.hinhbaihat" width="100%" alt="" />
+                                <div class="order margin-auto "> <a href="#">@item.tenbaihat</a> </div>
+                            </figure>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>
+<style>
+    .margin-auto {
+        margin: -8px auto 8px;
+    }
+    .imgplaylist{
+        width:100%;
+    }
+    .nameplaylist{
+        width:100%;
+        text-align:center;
+        margin: 0 auto;
+    }
+</style>

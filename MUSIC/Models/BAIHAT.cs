@@ -17,8 +17,6 @@ namespace MUSIC.Models
 
         public int? idalbum { get; set; }
 
-        public int? id { get; set; }
-
         public int? idplaylist { get; set; }
 
         [Required]
