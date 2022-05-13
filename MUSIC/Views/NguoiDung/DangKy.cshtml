@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Đăng Ký";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <div class="auth-action-left">
+                <div class="auth-form-outer">
+                    <h2 class="auth-form-title">
+                        Create Account
+                    </h2>
+                    <form class="login-form">
+                        @Html.TextBox("Hoten", "", new { placeholder = "Họ và Tên" })
+                        @Html.TextBox("TenDN", "", new { placeholder = "Tên Đăng nhập" })
+                        @Html.Password("MatKhau", "", new { placeholder = "Mật khẩu" })
+                        @Html.Password("NhapLaiMatKhau", "", new { placeholder = "Nhập lại mật khẩu" })
+                        @Html.TextBox("Email", "", new { placeholder = "Email" })
+                        @Html.TextBox("DiaChi", "", new { placeholder = "DiaChi" })
+                        @Html.TextBox("DienThoai", "", new { placeholder = "Điện Thoại" })
+                        <div class="footer-action1">
+                            <input type="submit" value="Sign Up" class="auth-submit">
+                            <a href="/NguoiDung/DangNhap" class="auth-btn-direct">Sign In</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="auth-action-right">
+                <div class="auth-image">
+                    <img src="https://i.pinimg.com/564x/66/1f/87/661f872c7edaa50edd1914d1f1582ffa.jpg" alt="login">
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<style>
+    .footer-action1 {
+        display: flex;
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+</style>

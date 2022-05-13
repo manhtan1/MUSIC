@@ -334,8 +334,10 @@ header {
 	left: 12%;
 }
 .saction4 {
-	background-color: #f1f1f1;
 	padding: 60px 0 60px;
+	background-image: url(https://localhost:44316/images/nen1.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 .special h2 {
 	text-align: center;

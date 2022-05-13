@@ -11,7 +11,6 @@ namespace MUSIC.Models
     {
         [StringLength(50)]
         public string HoTen { get; set; }
-
         [Key]
         [StringLength(50)]
         public string TenDN { get; set; }
@@ -23,7 +22,6 @@ namespace MUSIC.Models
         [StringLength(20)]
         public string DienThoai { get; set; }
 
-        public int? Tuoi { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? NgayDangKy { get; set; }
