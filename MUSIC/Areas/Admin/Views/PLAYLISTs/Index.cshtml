@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MUSIC.Models.PLAYLIST>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ca sĩ</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới Ca sĩ", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên Ca sĩ
+        </th>
+        <th>
+            Hình nền
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ten)
+        </td>
+        <td>
+            <img src="@Html.DisplayFor(modelItem => item.hinhnen)" style="width:50%;height:50%;" alt="Alternate Text" />
+        </td>
+       
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idplaylist }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idplaylist }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idplaylist })
+        </td>
+    </tr>
+}
+
+</table>

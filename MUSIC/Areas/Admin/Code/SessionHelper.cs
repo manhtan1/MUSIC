@@ -20,7 +20,7 @@ namespace controller.Areas.Admin.Code
             else
             {
                 return session as UserSessions;
-            }    
+            }
         }
 
     }

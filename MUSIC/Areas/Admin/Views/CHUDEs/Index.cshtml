@@ -1,0 +1,96 @@
+﻿@model IEnumerable<MUSIC.Models.CHUDE>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<h2>Chủ đề nhạc</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới chủ đề", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên chủ đề
+        </th>
+        <th>
+            Hình ảnh
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.tenchude)
+    </td>
+    @{
+        var img = "~/images/nen.jpg";
+
+
+    }
+    @if (item.hinhchude == "Alternate Text")
+    {
+        <td>
+            <img src="img" width="200px" alt="nen" />
+        </td>
+
+    }
+    else
+    {
+        <td>
+            <img src="@Html.DisplayFor(modelItem => item.hinhchude)" width="200px" alt="Alternate Text" />
+
+        </td>
+    }
+
+
+    <td>
+        <a class="btn-edit" href="@Url.Action("Edit", "CHUDEs", new { id = item.idchude })">
+            <ion-icon name="create-outline"></ion-icon>
+        </a>
+        |
+        <a class="btn-delete" href="@Url.Action("Delete","CHUDEs", new { id = item.idchude })">
+            <ion-icon name="trash-outline"></ion-icon>
+        </a>
+
+    </td>
+</tr>
+    }
+
+</table>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<style>
+    .btn-edit {
+        font-size: 18px;
+        background: #2653d4;
+        margin-right: 5px;
+        color: #fff;
+        padding: 8px;
+        border-radius: 5px;
+    }
+    .btn-delete{
+        background: red;
+    color: #fff;
+    font-size: 20px;
+    padding: 6px 9px;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+    tr td {
+        line-height: 140px;
+    }
+
+    tr td {
+        text-align: center;
+    }
+
+    tr th {
+        text-align: center;
+    }
+</style>

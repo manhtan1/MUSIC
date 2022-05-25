@@ -1,0 +1,43 @@
+﻿@model MUSIC.Models.PLAYLIST
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PLAYLIST</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hinhnen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hinhnen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hinhicon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hinhicon)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idplaylist }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

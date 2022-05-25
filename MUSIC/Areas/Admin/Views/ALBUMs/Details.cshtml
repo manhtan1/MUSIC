@@ -1,0 +1,35 @@
+﻿@model MUSIC.Models.ALBUM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ALBUM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tenalbum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenalbum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tencasialbum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tencasialbum)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idalbum }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

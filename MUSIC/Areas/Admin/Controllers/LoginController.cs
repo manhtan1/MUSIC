@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace controller.Areas.Admin.Controllers
+namespace MUSIC.Areas.Admin.Controllers
 {
     public class LoginController : Controller
     {
@@ -22,21 +22,18 @@ namespace controller.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(LoginModel model) 
+        public ActionResult Index(LoginModel model)
         {
-            if(model.email != this.emailAdmin || model.password != this.password)
+            if (model.email != this.emailAdmin || model.password != this.password)
             {
 
-                ModelState.AddModelError("","Tên đăng nhập hoặc mật khẩu không đúng");
+                ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng");
                 return View(model);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("index", "Index");
 
 
         }
-
-    
-
     }
 }

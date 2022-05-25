@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MUSIC.Models.THELOAI>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CHUDE.tenchude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tentheloai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hinhtheloai)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CHUDE.tenchude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tentheloai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hinhtheloai)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idtheloai }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idtheloai }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idtheloai })
+        </td>
+    </tr>
+}
+
+</table>

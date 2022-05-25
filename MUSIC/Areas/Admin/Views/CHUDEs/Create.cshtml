@@ -1,0 +1,60 @@
+﻿@model MUSIC.Models.CHUDE
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thêm</h2>
+
+@using (Html.BeginForm("Create", "CHUDEs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Chủ đề nhạc</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            ID chủ đề
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idchude, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.idchude, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Tên chủ đề
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tenchude, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tenchude, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Hình ảnh
+            <div class="col-md-10">
+                <input type="file" name="ImgUpload" value="" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn crt btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<a class="btn-delete" style="line-height:22px;" href="@Url.Action("Index","CHUDEs")">
+    Quay về
+    <ion-icon name="return-down-back-outline"></ion-icon>
+</a>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<style>
+    .crt {
+        background: #1cc88a;
+        color: #fff;
+    }
+</style>

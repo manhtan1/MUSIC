@@ -48,13 +48,29 @@
                             </ul>
                         </nav>
                     </div>
-                    <div class="login">
-                        <ul>
-                            <li><a href="/NguoiDung/DangNhap">Đăng nhập</a></li>
-                            <li><a href="/NguoiDung/DangKy">Đăng kí</a></li>
-                            <li><a href="#">Trợ giúp</a></li>
-                        </ul>
-                    </div>
+                    @{ 
+                        var session = (MUSIC.Models.THANHVIEN)Session["TaiKhoan"];
+                    }
+                    @if (session == null)
+                    {
+                        <div class="login">
+                            <ul>
+                                <li><a href="/NguoiDung/DangNhap">Đăng nhập</a></li>
+                                <li><a href="/NguoiDung/DangKy">Đăng kí</a></li>
+                                <li><a href="#">Trợ giúp</a></li>
+                            </ul>
+                        </div>
+                    }
+            else
+            {
+                <div class="login">
+                    <ul>
+                        <li>@session.HoTen</li>
+                        <li><a href="#">Trợ giúp</a></li>
+                    </ul>
+                </div>
+            }
+                    
                 </div>
             </div>
         </div>

@@ -46,10 +46,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -136,9 +136,16 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Code\SessionHelper.cs" />
     <Compile Include="Areas\Admin\Code\UserSessions.cs" />
-    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ALBUMsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BAIHATsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CHUDEsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\IndexController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PLAYLISTsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\THANHVIENsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\THELOAIsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MusicController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1857,6 +1864,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\responsive.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\flexslider-icon.svg" />
@@ -1932,6 +1940,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Chude\" />
     <Folder Include="Assetss\Customer\images\" />
   </ItemGroup>
   <ItemGroup>
@@ -1959,10 +1969,6 @@
     <Content Include="fonts\SourceSansPro-Regular.ttf" />
     <Content Include="fonts\SourceSansPro-Semibold.ttf" />
     <Content Include="fonts\SourceSansPro-SemiboldItalic.ttf" />
-    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Assetss\Admin\scss\navs\_global.scss" />
     <Content Include="Assetss\Admin\scss\navs\_sidebar.scss" />
     <Content Include="Assetss\Admin\scss\navs\_topbar.scss" />
@@ -2135,9 +2141,45 @@
     <Content Include="Assetss\Admin\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="Assetss\Admin\vendor\jquery\jquery.min.map" />
     <Content Include="Assetss\Admin\vendor\jquery\jquery.slim.min.map" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Index\index.cshtml" />
+    <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CHUDEs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CHUDEs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\CHUDEs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\CHUDEs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CHUDEs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ALBUMs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ALBUMs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ALBUMs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ALBUMs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ALBUMs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\BAIHATs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\BAIHATs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\BAIHATs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\BAIHATs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\BAIHATs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\PLAYLISTs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\PLAYLISTs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\PLAYLISTs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\PLAYLISTs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\PLAYLISTs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\THELOAIs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\THELOAIs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\THELOAIs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\THELOAIs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\THELOAIs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\THANHVIENs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\THANHVIENs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\THANHVIENs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\THANHVIENs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\THANHVIENs\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\NguoiDung\DangKy.cshtml" />
     <Content Include="Views\NguoiDung\DangNhap.cshtml" />
+    <Content Include="Views\Music\BaiHat.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

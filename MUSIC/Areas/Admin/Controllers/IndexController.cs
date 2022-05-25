@@ -4,16 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace controller.Areas.Admin.Controllers
+namespace MUSIC.Areas.Admin.Controllers
 {
-    public class HomeController : Controller
+    public class IndexController : Controller
     {
-        // GET: Admin/Home
-        public ActionResult Index()
+        // GET: Admin/Index
+        public ActionResult index()
         {
             return View();
         }
-
-
     }
 }

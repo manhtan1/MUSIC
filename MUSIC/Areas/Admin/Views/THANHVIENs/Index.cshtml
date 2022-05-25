@@ -1,0 +1,70 @@
+﻿@model IEnumerable<MUSIC.Models.THANHVIEN>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thành viên</h2>
+
+<p>
+   @* @Html.ActionLink("Create New", "Create")*@
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Họ Tên
+        </th>
+        
+        <th>
+            Số điện thoại
+        </th>
+        <th>
+            Ngày đăng ký
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Địa chỉ
+        </th>
+        
+        <th>
+            Ngày Sinh
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoTen)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.DienThoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayDangKy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiaChi)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.NgaySinh)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TenDN }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TenDN }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TenDN })
+        </td>
+    </tr>
+}
+
+</table>

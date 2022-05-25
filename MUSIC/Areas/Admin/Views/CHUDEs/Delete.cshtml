@@ -1,0 +1,75 @@
+﻿@model MUSIC.Models.CHUDE
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Xóa chủ để</h2>
+
+<h3>Nếu xóa chủ đề này sẽ không còn tồn tại</h3>
+<div>
+    <hr />
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.tenchude)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.hinhchude)
+                </th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>
+                    <h4 style="color:red; font-weight:500;">
+                        @Html.DisplayFor(model => model.tenchude)
+                    </h4>
+                </td>
+                <td>
+                    <img width="300px" src="@Html.DisplayFor(model => model.hinhchude)" alt="Alternate Text" />
+
+                </td>
+                <td>
+                    <input  type="submit" value="Delete" class="btn dlt btn-default" />
+                </td>
+            </tr>
+        </table>
+
+
+            <a class="btn-delete" style="line-height:22px;" href="@Url.Action("Index","CHUDEs")">
+                Quay về
+                <ion-icon name="return-down-back-outline"></ion-icon>
+            </a>
+    }
+</div>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<style>
+    .dlt {
+        background: red;
+        color: #000;
+        font-weight: 700;
+        padding: 10px;
+    }
+        .dlt:hover {
+            background: #1cc88a;
+            color:#fff;
+        }
+    tr td {
+        line-height: 140px;
+    }
+
+    tr td {
+        text-align: center;
+    }
+
+    tr th {
+        text-align: center;
+    }
+</style>

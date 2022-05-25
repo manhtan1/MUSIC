@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace controller.Areas.Admin
+namespace MUSIC.Areas.Admin
 {
     public class AdminAreaRegistration : AreaRegistration 
     {
@@ -17,7 +17,7 @@ namespace controller.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index",Controller = "Login", id = UrlParameter.Optional }
+                new { action = "Index", id = UrlParameter.Optional }
             );
         }
     }
