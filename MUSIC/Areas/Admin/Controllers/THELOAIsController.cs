@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -40,25 +41,39 @@ namespace MUSIC.Areas.Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.idchude = new SelectList(db.CHUDEs, "idchude", "tenchude");
-            return View();
+            return View(new THELOAI { });
         }
 
-        // POST: Admin/THELOAIs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idtheloai,idchude,tentheloai,hinhtheloai")] THELOAI tHELOAI)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Create(THELOAI tHELOAI)
         {
-            if (ModelState.IsValid)
+            if (string.IsNullOrEmpty(tHELOAI.tentheloai) == true)
             {
-                db.THELOAIs.Add(tHELOAI);
+                ModelState.AddModelError("", "Tên thể loại không được null");
+                return View(tHELOAI);
+            }
+            if (tHELOAI.ImgTheLoai != null)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(tHELOAI.ImgTheLoai.FileName);
+                string extension = Path.GetExtension(tHELOAI.ImgTheLoai.FileName);
+                fileName = fileName + extension;
+                tHELOAI.hinhtheloai = "/images/theloainhac/" + fileName;
+                tHELOAI.ImgTheLoai.SaveAs(Path.Combine(Server.MapPath("~/images/theloainhac/"), fileName));
+            }
+            db.THELOAIs.Add(tHELOAI);
                 db.SaveChanges();
+            if (tHELOAI.idtheloai > 0)
+            {
                 return RedirectToAction("Index");
             }
+            else
+            {
+                ModelState.AddModelError("", "Không thể lưu vào cơ sở dữ liệu");
+                return View(tHELOAI);
+            }
+            
 
-            ViewBag.idchude = new SelectList(db.CHUDEs, "idchude", "tenchude", tHELOAI.idchude);
-            return View(tHELOAI);
         }
 
         // GET: Admin/THELOAIs/Edit/5
@@ -82,16 +97,20 @@ namespace MUSIC.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idtheloai,idchude,tentheloai,hinhtheloai")] THELOAI tHELOAI)
+        public ActionResult Edit( THELOAI tHELOAI)
         {
-            if (ModelState.IsValid)
+            if (tHELOAI.ImgTheLoai != null)
             {
-                db.Entry(tHELOAI).State = EntityState.Modified;
+                string fileName = Path.GetFileNameWithoutExtension(tHELOAI.ImgTheLoai.FileName);
+                string extension = Path.GetExtension(tHELOAI.ImgTheLoai.FileName);
+                fileName = fileName + extension;
+                tHELOAI.hinhtheloai = "/images/theloainhac/" + fileName;
+                tHELOAI.ImgTheLoai.SaveAs(Path.Combine(Server.MapPath("~/images/theloainhac/"), fileName));
+            }
+            db.Entry(tHELOAI).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-            ViewBag.idchude = new SelectList(db.CHUDEs, "idchude", "tenchude", tHELOAI.idchude);
-            return View(tHELOAI);
+            
         }
 
         // GET: Admin/THELOAIs/Delete/5

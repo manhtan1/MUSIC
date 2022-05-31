@@ -1,0 +1,60 @@
+﻿@using MUSIC.Models
+
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string key = Request.QueryString["key"];
+    List<BAIHAT> result = new List<BAIHAT>();
+}
+
+<div class="container" id="resturant">
+    @{
+        if (string.IsNullOrEmpty(key))
+        {
+            <h3>Vui lòng nhập từ khóa cần tìm</h3>
+        }
+        else
+        {
+            if (key == "" || key.Length < 3)
+            {
+                <h3>Vui lòng nhập từ khóa cần tìm</h3>
+            }
+            else
+            {
+                result = new BAIHAT().searchByKey(key);
+                <h2 style=" padding: 25px 0; color: red;">Kết quả tìm kiếm từ khóa "@key"</h2>
+
+                foreach (var item in result)
+                {
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6" style="padding:0 5px">
+                        <figure class="food os-animation" data-os-animation="fadeInDown" data-os-animation-delay="0.05s">
+                            <img src="@item.hinhbaihat" width="100%" alt="" />
+                            <div class="order margin-auto "> <a href="/Home/DetailsMusic/@item.idbaihat">@item.tenbaihat</a> </div>
+                        </figure>
+                    </div>
+                }
+
+            }
+        }
+
+    }
+    </div>
+<style>
+    .margin-auto {
+        margin: -8px auto 8px;
+    }
+
+    .imgplaylist {
+        width: 100%;
+    }
+
+    .nameplaylist {
+        width: 100%;
+        text-align: center;
+        margin: 0 auto;
+    }
+</style>
+
+

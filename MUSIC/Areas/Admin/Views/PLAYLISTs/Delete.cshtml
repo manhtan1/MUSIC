@@ -7,43 +7,72 @@
 
 <h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
+<h3>Bạn có chắc xóa ca sĩ này khỏi website?</h3>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
     <h4>PLAYLIST</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ten)
-        </dt>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ten)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.hinhnen)
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                <h4 style="color:red; font-weight:500;">
+                    @Html.DisplayFor(model => model.ten)
+                </h4>
+            </td>
+            <td>
+                <img width="300px" src=" @Html.DisplayFor(model => model.hinhnen)" alt="Alternate Text" />
 
-        <dd>
-            @Html.DisplayFor(model => model.ten)
-        </dd>
+            </td>
+            <td>
+                <input type="submit" value="Delete" class="btn dlt btn-default" />
+            </td>
+        </tr>
+    </table>
+    <div class="form-actions no-color">
+        <td>
+            <input type="submit" value="Delete" class="btn dlt btn-default" />
+        </td>
+        <a class="btn-delete" style="line-height:22px;" href="@Url.Action("Index","CHUDEs")">
+            Quay về
+            <ion-icon name="return-down-back-outline"></ion-icon>
+        </a>
+    </div>
+}
 
-        <dt>
-            @Html.DisplayNameFor(model => model.hinhnen)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.hinhnen)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.hinhicon)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.hinhicon)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<style>
+    .dlt {
+        background: red;
+        color: #000;
+        font-weight: 700;
+        padding: 10px;
     }
-</div>
+
+        .dlt:hover {
+            background: #1cc88a;
+            color: #fff;
+        }
+
+    tr td {
+        line-height: 140px;
+    }
+
+    tr td {
+        text-align: center;
+    }
+
+    tr th {
+        text-align: center;
+    }
+</style>

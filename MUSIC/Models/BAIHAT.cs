@@ -5,10 +5,18 @@ namespace MUSIC.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     [Table("BAIHAT")]
     public partial class BAIHAT
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BAIHAT()
+        {
+            Comments = new HashSet<Comment>();
+            CT_luotthich = new HashSet<CT_luotthich>();
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int idbaihat { get; set; }
@@ -34,11 +42,25 @@ namespace MUSIC.Models
         [Required]
         [StringLength(50)]
         public string linkbaihat { get; set; }
+        public string lyrics { get; set; }
+
+        public int? luotthich { get; set; }
 
         public virtual ALBUM ALBUM { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CT_luotthich> CT_luotthich { get; set; }
 
         public virtual PLAYLIST PLAYLIST { get; set; }
 
         public virtual THELOAI THELOAI { get; set; }
+        public List<BAIHAT> searchByKey(string key)
+        {
+            DBcontent db = new DBcontent();
+            return db.BAIHATs.SqlQuery("Select * from BAIHAT where lyrics like N'%" + key+ "%' or tenbaihat like N'%" + key + "%'").ToList();
+        }
     }
 }

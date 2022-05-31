@@ -18,7 +18,9 @@
         <th>
             Hình nền
         </th>
-        
+        <th>
+            Tác phẩm
+        </th>
         <th></th>
     </tr>
 
@@ -28,7 +30,26 @@
             @Html.DisplayFor(modelItem => item.ten)
         </td>
         <td>
-            <img src="@Html.DisplayFor(modelItem => item.hinhnen)" style="width:50%;height:50%;" alt="Alternate Text" />
+            <img src="@Html.DisplayFor(modelItem => item.hinhnen)" style="width:300px" alt="Alternate Text" />
+        </td>
+        <td>
+            @{
+                MUSIC.Models.DBcontent db = new MUSIC.Models.DBcontent();
+                var nhac = db.BAIHATs.ToList();
+            }
+            <ul>
+                @foreach (var i in nhac)
+                {
+
+                    if (item.idplaylist == i.idplaylist)
+                    {
+                <li>
+                    @i.tenbaihat
+                </li>
+                    }
+                }
+            </ul>
+            
         </td>
        
         <td>

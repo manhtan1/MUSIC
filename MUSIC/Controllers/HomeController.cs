@@ -15,19 +15,25 @@ namespace MUSIC.Controllers
 
             return View(db.BAIHATs.ToList());
         }
-
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult DetailsMusic(int id)
         {
-            ViewBag.Message = "Your application description page.";
+            BAIHAT music = db.BAIHATs.Find(id);
+            if (music == null)
+            {
+                return HttpNotFound();
+            }
 
+            return View(music);
+        }
+        public ActionResult Search()
+        {
             return View();
         }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+        [HttpPost]
+        public ActionResult Search(string searchMUSIC) {
+            return RedirectToAction("Search", "Home", new { key = searchMUSIC });
         }
+        
     }
 }

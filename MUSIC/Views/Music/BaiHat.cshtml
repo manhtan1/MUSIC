@@ -23,7 +23,7 @@
 
             <!-- CD -->
             <div class="cd">
-                <div class="cd-thumb">
+                <div class="cd-thumb" style=" background-image: url(@i.hinhbaihat)">
                 </div>
             </div>
 
@@ -49,7 +49,9 @@
 
             <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
 
-            <audio id="audio" src="~/music/didetrove.mp3"></audio>
+            <audio id="audio" for="progress" hidden controls>
+                <source src="@i.linkbaihat">
+            </audio>
         }
 
     </div>
@@ -263,7 +265,7 @@
             font-size: 18px;
         }
 </style>
-@*<script>
+<script>
     // Một số bài hát có thể bị lỗi do liên kết bị hỏng. Vui lòng thay thế liên kết khác để có thể phát
     // Some songs may be faulty due to broken links. Please replace another link so that it can be played
 
@@ -294,7 +296,7 @@
         config: {},
         // (1/2) Uncomment the line below to use localStorage
         // config: JSON.parse(localStorage.getItem(PlAYER_STORAGE_KEY)) || {},
-        songs: [
+        @*songs: [
             var items = @Html.Raw(Json.Encode(Model.ToArray()));
             for(var i = 0, i < items.length , i++)
             {
@@ -304,7 +306,7 @@
                 image: item.hinhbaihat,
             }
 
-        ],
+        ],*@
         setConfig: function (key, value) {
             this.config[key] = value;
             // (2/2) Uncomment the line below to use localStorage
@@ -546,4 +548,4 @@
 
     app.start();
 
-</script>*@
+</script>

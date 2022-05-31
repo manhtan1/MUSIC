@@ -61,9 +61,9 @@
                     @foreach (var item in Model)
                     {
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6" style="padding:0 5px">
-                            <figure class="food os-animation" data-os-animation="fadeInDown" data-os-animation-delay="3s">
+                            <figure class="food os-animation" data-os-animation="fadeInDown" data-os-animation-delay="0.05s">
                                 <img src="@item.hinhbaihat" width="100%" alt="" />
-                                <div class="order margin-auto "> <a href="#">@item.tenbaihat</a> </div>
+                                <div class="order margin-auto "> <a href="/Home/DetailsMusic/@item.idbaihat">@item.tenbaihat</a> </div>
                             </figure>
                         </div>
                     }

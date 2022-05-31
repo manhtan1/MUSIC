@@ -153,6 +153,8 @@
     <Compile Include="Models\ALBUM.cs" />
     <Compile Include="Models\BAIHAT.cs" />
     <Compile Include="Models\CHUDE.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\CT_luotthich.cs" />
     <Compile Include="Models\DBcontent.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PLAYLIST.cs" />
@@ -1943,6 +1945,7 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Chude\" />
     <Folder Include="Assetss\Customer\images\" />
+    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\flexslider-icon.eot" />
@@ -2166,7 +2169,6 @@
     <Content Include="Areas\Admin\Views\PLAYLISTs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\PLAYLISTs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\PLAYLISTs\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\THELOAIs\Create.cshtml" />
     <Content Include="Areas\Admin\Views\THELOAIs\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\THELOAIs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\THELOAIs\Edit.cshtml" />
@@ -2176,10 +2178,13 @@
     <Content Include="Areas\Admin\Views\THANHVIENs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\THANHVIENs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\THANHVIENs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\THELOAIs\Create.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\NguoiDung\DangKy.cshtml" />
     <Content Include="Views\NguoiDung\DangNhap.cshtml" />
     <Content Include="Views\Music\BaiHat.cshtml" />
+    <Content Include="Views\Home\DetailsMusic.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

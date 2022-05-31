@@ -1,6 +1,7 @@
 ﻿using MUSIC.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -101,7 +102,7 @@ namespace MUSIC.Controllers
             }
             else
             {
-                THANHVIEN kh = db.THANHVIENs.SingleOrDefault(n => n.TenDN == tendn || n.Email == tendn && n.MatKhau == mk);
+                THANHVIEN kh = db.THANHVIENs.SingleOrDefault(n => (n.TenDN == tendn && n.MatKhau == mk) || (n.Email == tendn && n.MatKhau == mk));
                 if (kh != null)
                 {
                     ViewBag.ThongBao = "Đăng nhập thành công";
@@ -115,5 +116,55 @@ namespace MUSIC.Controllers
             }
             return View();
         }
+
+        public ActionResult Cmt(int idbaihat, FormCollection collection)
+        {
+            var cmt = collection["cmt"];
+            THANHVIEN kh = (THANHVIEN)Session["TaiKhoan"];
+            List<BAIHAT> music = new List<BAIHAT>();
+            BAIHAT ms = music.SingleOrDefault(n => n.idbaihat == idbaihat);
+
+           
+
+            if (string.IsNullOrEmpty(cmt))
+            {
+                ViewData["Loi"] = "Bạn chưa nhập Comment";
+            }
+            Comment cm = new Comment();
+
+                cm.idbaihat = idbaihat;
+                cm.TenDN = kh.TenDN;
+                cm.comment1 = cmt;
+                cm.ngaycmt = DateTime.Now;
+                db.Comments.Add(cm);
+                db.SaveChanges();
+                //return RedirectToAction("DetailsMusic", "Home", idbaihat);
+            return RedirectToAction("Index", "Home");
+        }
+        public ActionResult Like(int idbaihat)
+        {
+            THANHVIEN kh = (THANHVIEN)Session["TaiKhoan"];
+            CT_luotthich like = new CT_luotthich();
+            BAIHAT music = db.BAIHATs.Find(idbaihat);
+            
+            if (like.like==1)
+            {
+                music.luotthich += 1;
+                db.Entry(music).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            like.TenDN = kh.TenDN;
+            like.idbaihat = idbaihat;
+            like.like = 1;
+
+            db.CT_luotthich.Add(like);
+            db.SaveChanges();
+
+            ///Home/DetailsMusic/"+ idbaihat
+            return RedirectToAction("Index","Home");
+
+        }
+        
+
     }
 }

@@ -5,10 +5,10 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Thể loại</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm mới thể loại nhạc", "Create")
 </p>
 <table class="table">
     <tr>
@@ -33,7 +33,7 @@
             @Html.DisplayFor(modelItem => item.tentheloai)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.hinhtheloai)
+            <img src="@Html.DisplayFor(modelItem => item.hinhtheloai)" width="200px" alt="Alternate Text" />
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.idtheloai }) |

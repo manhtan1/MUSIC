@@ -24,16 +24,20 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.hinhnen)
+            <img src=" @Html.DisplayFor(model => model.hinhnen)" width="300px;" alt="Alternate Text" />
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.hinhicon)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.hinhicon)
-        </dd>
+        @{
+            var getss = Session["baihat"];
+        }
+        @if (getss != null)
+        {
+            <h2> @getss</h2>
+        }
+        else
+        {
+            <h2>Không có bài hát nào.</h2>
+        }
 
     </dl>
 </div>

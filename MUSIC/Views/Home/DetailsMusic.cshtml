@@ -1,0 +1,250 @@
+﻿@model MUSIC.Models.BAIHAT
+@{
+    ViewBag.Title = "DetailsMusic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="detailsmusic">
+    <div class="card">
+        <div class="imgBx">
+            <img src="@Model.hinhbaihat" alt="">
+        </div>
+        <div class="details">
+            <h3 style="font-weight:700;">
+                @Model.tenbaihat
+            </h3>
+            <h4>@Model.casi</h4>
+            <audio controls>
+                <source src="@Model.linkbaihat">
+            </audio>
+            @{
+                MUSIC.Models.DBcontent db = new MUSIC.Models.DBcontent();
+                var cmt = db.Comments.ToList();
+                MUSIC.Models.CT_luotthich tym = new MUSIC.Models.CT_luotthich();
+                var session = (MUSIC.Models.THANHVIEN)Session["TaiKhoan"];
+
+            }
+
+            @if (session != null)
+            {
+                <div class="like">
+
+                    @*// && (tym.like==true)*@
+                    @if (tym.TenDN == session.TenDN)
+                    {
+                        <ion-icon style="color:red;" class="plr5px" name="heart-outline"></ion-icon>
+                    }
+                    else
+                    {
+                        <ion-icon class="plr5px" name="heart-outline"></ion-icon>
+                    }
+                    @using (Html.BeginForm("Like", "NguoiDung", new { @idbaihat = @Model.idbaihat }))
+                    {
+                        <input type="submit" hidden id="heart" name="heart" value="heart">
+                        <label class="plr5px" for="heart">Thích</label>
+
+                    }
+                </div>
+
+            }
+            else
+            {
+                <div class="like">
+                    <ion-icon class="plr5px" name="heart-outline"></ion-icon>
+                    @using (Html.BeginForm("Like", "NguoiDung", new { @idbaihat = @Model.idbaihat }))
+                    {
+                        <input type="submit" hidden id="heart" name="heart" value="heart">
+                        <label class="plr5px" for="heart">Thích</label>
+
+                    }
+                </div>
+            }
+                <div class="like">
+                    <span class="plr5px">Số lượt thích: @Model.luotthich</span>
+                </div>
+                <span class=" title-cmt">Đánh giá</span>
+
+
+
+                @if (session != null)
+                {
+                    <div class="cmt">
+                        @using (Html.BeginForm("Cmt", "NguoiDung", new { @idbaihat = @Model.idbaihat }))
+                        {
+                            @ViewData["Loi"]
+                            @Html.TextBox("cmt", "", new { @class = "cmt_input", placeholder = "Thêm bình luận mới" })
+                            <input value="Đăng" type="submit"></input>
+                        }
+                        @*<form action="/NguoiDung/Cmt/@Model.idbaihat" method="post">
+                    </form>*@
+                    </div>
+                }
+
+
+                @foreach (var bl in cmt)
+                {
+                    if (Model.idbaihat == bl.idbaihat)
+                    {
+                        <div class="user">
+                            <ion-icon name="person-circle-outline"></ion-icon>
+                            <div class="user_cmt">
+                                <div>
+                                    <span class="name_user">@bl.THANHVIEN.HoTen</span>
+                                    <span class="time_cmt">@bl.ngaycmt</span>
+                                </div>
+                                <span class="cmt-main">@bl.comment1</span>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        if (cmt.Count == 0)
+                        {
+                            <div class="none-user">
+                                <span>Không có lượt bình luận</span>
+                            </div>
+                        }
+                        @*<div class="none-user">
+                        <span >Không có lượt bình luận</span>
+                    </div>*@
+                    }
+                }
+            </div>
+    </div>
+</div>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<style>
+    .plr5px {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    #detailsmusic {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fff;
+        padding: 50px 0;
+    }
+
+    .card {
+        position: relative;
+        width: 1000px;
+        height: 500px;
+        display: flex;
+        border-radius: 30px;
+        box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+    }
+
+        .card .imgBx {
+            position: relative;
+            min-width: 600px;
+            height: 100%;
+            background: url("https://i.pinimg.com/564x/11/cd/00/11cd0019befdc4c55afc7314f6a04a31.jpg");
+            border-top-left-radius: 30px;
+            border-bottom-left-radius: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+        }
+            .card .imgBx img{
+                width:80%;
+            }
+
+            .card .details {
+                /* position: relative; */
+                min-width: 400px;
+                height: 100%;
+                background: #fff;
+                border-top-right-radius: 30px;
+                border-bottom-right-radius: 30px;
+                justify-content: center;
+                /* align-items: center; */
+                flex-direction: column;
+                display: flex;
+                padding: 20px;
+            }
+
+            .like,
+            .card .details h4,
+            .card .details h3 {
+                margin: 10px 0;
+            }
+
+    .like {
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+    }
+
+    .cmt {
+        font-size: 15px;
+        padding: 5px 5px 5px 0;
+        text-align: center;
+    }
+
+        .cmt_input {
+            border: none;
+            border-style: none;
+            padding: 5px;
+            outline: none;
+        }
+
+        .cmt button {
+            padding: 5px;
+            border: none;
+            opacity: 0.5;
+        }
+
+            .cmt button:hover {
+                cursor: pointer;
+                background: rgba(0,0,0,0.1);
+                opacity: 1;
+            }
+
+    .title-cmt {
+        padding: 5px;
+        font-weight: 600;
+        color: red;
+        text-align: center;
+    }
+    .user {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+    }
+
+        .user ion-icon {
+            font-size: 45px;
+            padding: 0 10px;
+            color: #7558e7;
+        }
+
+    .user_cmt {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cmt-main {
+        font-size: 14px;
+    }
+
+    .name_user {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .time_cmt {
+        color: #97a3af;
+        font-size: 10px;
+    }
+    .none-user{
+        padding:20px;
+        text-align:center;
+    }
+</style>
+
+

@@ -9,8 +9,16 @@ namespace MUSIC.Models
     [Table("THANHVIEN")]
     public partial class THANHVIEN
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public THANHVIEN()
+        {
+            Comments = new HashSet<Comment>();
+            CT_luotthich = new HashSet<CT_luotthich>();
+        }
+
         [StringLength(50)]
         public string HoTen { get; set; }
+
         [Key]
         [StringLength(50)]
         public string TenDN { get; set; }
@@ -22,6 +30,7 @@ namespace MUSIC.Models
         [StringLength(20)]
         public string DienThoai { get; set; }
 
+        public int? Tuoi { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? NgayDangKy { get; set; }
@@ -44,5 +53,11 @@ namespace MUSIC.Models
 
         [StringLength(50)]
         public string CauTraLoi { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CT_luotthich> CT_luotthich { get; set; }
     }
 }

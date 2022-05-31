@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -17,12 +18,15 @@ namespace MUSIC.Areas.Admin.Controllers
         // GET: Admin/PLAYLISTs
         public ActionResult Index()
         {
+            
             return View(db.PLAYLISTs.ToList());
         }
 
         // GET: Admin/PLAYLISTs/Details/5
         public ActionResult Details(int? id)
         {
+            var baihat = db.PLAYLISTs.Find(id).BAIHATs;
+            Session["baihat"] = baihat;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -46,16 +50,29 @@ namespace MUSIC.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idplaylist,ten,hinhnen,hinhicon")] PLAYLIST pLAYLIST)
+        public ActionResult Create(PLAYLIST pLAYLIST)
         {
-            if (ModelState.IsValid)
-            {
-                db.PLAYLISTs.Add(pLAYLIST);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(pLAYLIST);
+            
+                try
+                {
+                    if (pLAYLIST.ImgPlaylist != null)
+                    {
+                        string fileName = Path.GetFileNameWithoutExtension(pLAYLIST.ImgPlaylist.FileName);
+                        string extension = Path.GetExtension(pLAYLIST.ImgPlaylist.FileName);
+                        fileName = fileName + extension;
+                         pLAYLIST.hinhnen = "/images/chude/" + fileName;
+                    pLAYLIST.hinhicon = "/images/chude/" + fileName;
+                    pLAYLIST.ImgPlaylist.SaveAs(Path.Combine(Server.MapPath("~/images/chude/"), fileName));
+                    }
+                    db.PLAYLISTs.Add(pLAYLIST);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    return RedirectToAction("Index");
+                }
+           
         }
 
         // GET: Admin/PLAYLISTs/Edit/5
@@ -78,15 +95,22 @@ namespace MUSIC.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idplaylist,ten,hinhnen,hinhicon")] PLAYLIST pLAYLIST)
+        public ActionResult Edit( PLAYLIST pLAYLIST)
         {
-            if (ModelState.IsValid)
-            {
+            
+                if (pLAYLIST.ImgPlaylist != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(pLAYLIST.ImgPlaylist.FileName);
+                    string extension = Path.GetExtension(pLAYLIST.ImgPlaylist.FileName);
+                    fileName = fileName + extension;
+                     pLAYLIST.hinhnen = "/images/chude/" + fileName;
+                    pLAYLIST.hinhicon = "/images/chude/" + fileName;
+                    pLAYLIST.ImgPlaylist.SaveAs(Path.Combine(Server.MapPath("~/images/chude/"), fileName));
+                }
                 db.Entry(pLAYLIST).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-            return View(pLAYLIST);
+            
         }
 
         // GET: Admin/PLAYLISTs/Delete/5
