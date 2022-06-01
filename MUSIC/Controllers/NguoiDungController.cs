@@ -149,7 +149,10 @@ namespace MUSIC.Controllers
             
             if (like.thich = true)
             {
-                db.BAIHATs.SqlQuery("update BAIHAT set luotthich = luotthich + 1 where idbaihat like " + idbaihat );
+                music.luotthich += 1;
+                db.Entry(music).State = EntityState.Modified;
+                db.SaveChanges();
+              /*  db.BAIHATs.SqlQuery("update BAIHAT set luotthich = luotthich + 1 where idbaihat like " + idbaihat );*/
             }
             like.TenDN = kh.TenDN;
             like.idbaihat = idbaihat;

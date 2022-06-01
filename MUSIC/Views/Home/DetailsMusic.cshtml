@@ -21,96 +21,99 @@
             @{
                 MUSIC.Models.DBcontent db = new MUSIC.Models.DBcontent();
                 var cmt = db.Comments.ToList();
-                MUSIC.Models.CT_luotthich tym = new MUSIC.Models.CT_luotthich();
                 var session = (MUSIC.Models.THANHVIEN)Session["TaiKhoan"];
+                MUSIC.Models.CT_luotthich tym = new MUSIC.Models.CT_luotthich();
 
             }
-
-            @if (session != null)
+        <div class="like">
+            
+            @if (session != null && tym.TenDN==session.TenDN && tym.idbaihat==@Model.idbaihat)
             {
-                <div class="like">
 
-                    @*// && (tym.like==true)*@
-                    @if (tym.TenDN == session.TenDN)
-                    {
-                        <ion-icon style="color:red;" class="plr5px" name="heart-outline"></ion-icon>
-                    }
-                    else
-                    {
-                        <ion-icon class="plr5px" name="heart-outline"></ion-icon>
-                    }
-                    @using (Html.BeginForm("Like", "NguoiDung", new { @idbaihat = @Model.idbaihat }))
-                    {
-                        <input type="submit" hidden id="heart" name="heart" value="heart">
-                        <label class="plr5px" for="heart">Thích</label>
-
-                    }
-                </div>
+                if (tym.thich = true )
+                {
+                    <ion-icon style="color:red;" class="plr5px" name="heart-outline"></ion-icon>
+                }
+                else
+                {
+                    <ion-icon class="plr5px" name="heart-outline"></ion-icon>
+                }
+                using (Html.BeginForm("Like", "NguoiDung", new { @idbaihat = @Model.idbaihat }))
+                {
+                    <input type="submit" hidden id="heart" name="heart" value="heart">
+                    <label class="plr5px" for="heart">Thích</label>
+                }
 
             }
             else
             {
-                <div class="like">
-                    <ion-icon class="plr5px" name="heart-outline"></ion-icon>
-                    @using (Html.BeginForm("Like", "NguoiDung", new { @idbaihat = @Model.idbaihat }))
-                    {
-                        <input type="submit" hidden id="heart" name="heart" value="heart">
-                        <label class="plr5px" for="heart">Thích</label>
+                <ion-icon class="plr5px" name="heart-outline"></ion-icon>
+                using (Html.BeginForm("Like", "NguoiDung", new { @idbaihat = @Model.idbaihat }))
+                {
+                    <input type="submit" hidden id="heart" name="heart" value="heart">
+                    <label class="plr5px" for="heart">Thích</label>
 
+                }
+            }
+        </div>
+
+           @* else
+            {
+            <div class="like">
+               
+            </div>
+            }*@
+            <div class="like">
+                <span class="plr5px">Số lượt thích: @Model.luotthich</span>
+            </div>
+            <span class=" title-cmt">Đánh giá</span>
+
+
+
+            @if (session != null)
+            {
+                <div class="cmt">
+                    @using (Html.BeginForm("Cmt", "NguoiDung", new { @idbaihat = @Model.idbaihat }))
+                    {
+                        @ViewData["Loi"]
+                        @Html.TextBox("cmt", "", new { @class = "cmt_input", placeholder = "Thêm bình luận mới" })
+                        <input value="Đăng" type="submit"></input>
                     }
+                    @*<form action="/NguoiDung/Cmt/@Model.idbaihat" method="post">
+                </form>*@
                 </div>
             }
-                <div class="like">
-                    <span class="plr5px">Số lượt thích: @Model.luotthich</span>
-                </div>
-                <span class=" title-cmt">Đánh giá</span>
 
 
-
-                @if (session != null)
+            @foreach (var bl in cmt)
+            {
+                if (Model.idbaihat == bl.idbaihat)
                 {
-                    <div class="cmt">
-                        @using (Html.BeginForm("Cmt", "NguoiDung", new { @idbaihat = @Model.idbaihat }))
-                        {
-                            @ViewData["Loi"]
-                            @Html.TextBox("cmt", "", new { @class = "cmt_input", placeholder = "Thêm bình luận mới" })
-                            <input value="Đăng" type="submit"></input>
-                        }
-                        @*<form action="/NguoiDung/Cmt/@Model.idbaihat" method="post">
-                    </form>*@
+                    <div class="user">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                        <div class="user_cmt">
+                            <div>
+                                <span class="name_user">@bl.THANHVIEN.HoTen</span>
+                                <span class="time_cmt">@bl.ngaycmt</span>
+                            </div>
+                            <span class="cmt-main">@bl.comment1</span>
+                        </div>
                     </div>
                 }
-
-
-                @foreach (var bl in cmt)
+                else
                 {
-                    if (Model.idbaihat == bl.idbaihat)
+                    if (cmt.Count == 0)
                     {
-                        <div class="user">
-                            <ion-icon name="person-circle-outline"></ion-icon>
-                            <div class="user_cmt">
-                                <div>
-                                    <span class="name_user">@bl.THANHVIEN.HoTen</span>
-                                    <span class="time_cmt">@bl.ngaycmt</span>
-                                </div>
-                                <span class="cmt-main">@bl.comment1</span>
-                            </div>
+                        <div class="none-user">
+                            <span>Không có lượt bình luận</span>
                         </div>
                     }
-                    else
-                    {
-                        if (cmt.Count == 0)
-                        {
-                            <div class="none-user">
-                                <span>Không có lượt bình luận</span>
-                            </div>
-                        }
-                        @*<div class="none-user">
-                        <span >Không có lượt bình luận</span>
-                    </div>*@
-                    }
+                    @*<div class="none-user">
+                    <span >Không có lượt bình luận</span>
+                </div>*@
                 }
-            </div>
+            }
+        </div>
     </div>
 </div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
