@@ -58,6 +58,10 @@
 
     <!-- Playlist -->
     <div class="playlist">
+        @{ 
+            MUSIC.Models.DBcontent db = new MUSIC.Models.DBcontent();
+            
+        }
         @foreach (var item in Model)
         {
             <div class="song">
@@ -286,7 +290,6 @@
     const randomBtn = document.querySelector(".btn-random");
     const repeatBtn = document.querySelector(".btn-repeat");
     const playlist = document.querySelector(".playlist");
-
     const app = {
 
         currentIndex: 0,
@@ -296,39 +299,20 @@
         config: {},
         // (1/2) Uncomment the line below to use localStorage
         // config: JSON.parse(localStorage.getItem(PlAYER_STORAGE_KEY)) || {},
-        @*songs: [
-            var items = @Html.Raw(Json.Encode(Model.ToArray()));
-            for(var i = 0, i < items.length , i++)
-            {
-                name: i.tenbaihat,
-                singer: i.casi,
-                path: i.linkbaihat,
-                image: item.hinhbaihat,
-            }
 
-        ],*@
+        ,
         setConfig: function (key, value) {
             this.config[key] = value;
             // (2/2) Uncomment the line below to use localStorage
             // localStorage.setItem(PlAYER_STORAGE_KEY, JSON.stringify(this.config));
         },
         render: function () {
+
+
             const htmls = this.songs.map((song, index) => {
-                return `
-<div class="song ${index === this.currentIndex ? " active" : ""
-                    }" data-index="${index}">
-    <div class="thumb"
-         style="background-image: url('${song.image}')">
-    </div>
-    <div class="body">
-        <h3 class="title">${song.name}</h3>
-        <p class="author">${song.singer}</p>
-    </div>
-    <div class="option">
-        <i class="fas fa-ellipsis-h"></i>
-    </div>
-</div>
-                    `;
+                return 
+                   
+                    ;
             });
             playlist.innerHTML = htmls.join("");
         },

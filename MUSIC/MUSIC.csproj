@@ -2185,6 +2185,8 @@
     <Content Include="Views\Music\BaiHat.cshtml" />
     <Content Include="Views\Home\DetailsMusic.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Music\TopView.cshtml" />
+    <Content Include="Views\Music\TopLike.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

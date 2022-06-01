@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="~/Content/animate.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="~/Content/responsive.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="~/Content/login.css" type="text/css" media="screen" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" />
     @*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">*@
 
@@ -47,12 +48,14 @@
                                 <li><a href="#resturant">Product</a></li>
                                 <li><a href="#offer">Nghệ sĩ</a></li>
                                 <li><a href="#contact">Liên hệ</a></li>
-                                <li><a href="#contact">BXH</a>
-                                    <ul style="display:none;">
-                                        <li><a href="#">Lượt View</a></li>
-                                        <li><a href="#">Lượt Thích</a></li>
+                                <li class="list-bxh">
+                                    <a href="#contact">BXH</a>
+                                    <ul class="item-bxh ">
+                                        <li><a href="/Music/Topview">Lượt View</a></li>
+                                        <li><a href="/Music/TopLike">Lượt Thích</a></li>
                                     </ul>
                                 </li>
+                                
                             </ul>
                         </nav>
                     </div>
@@ -193,5 +196,45 @@
 <style>
     .light-height100{
         line-height:100%;
+    }
+    .list-bxh{
+        position:relative;
+    }
+    .item-bxh {
+        padding: 0;
+        background: #f1f1f1;
+        margin: 0;
+        top:0;
+        left:100%;
+        width: 150px;
+        display:none;
+        list-style: none;
+        opacity:0;
+        position: absolute;
+    }
+    .list-bxh:hover .item-bxh {
+        display: block;
+        transition: 0.5s ease-in;
+        opacity: 1;
+    }
+    @*.item-bxh:before{
+            content:"";
+            position:absolute;
+            left:0;
+            width:20px;
+            height:20px;
+            background:#fff;
+        }*@
+    .item-bxh li {
+        padding: 5px 10px;
+        color: #f5f5f5;
+        left: 0;
+        font-size: 15px;
+        font-weight: 500;
+        opacity: 0.5;
+    }
+    .item-bxh li:hover {
+        color:#4cff00;
+        opacity:1;
     }
 </style>

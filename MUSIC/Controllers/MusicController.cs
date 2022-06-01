@@ -20,5 +20,15 @@ namespace MUSIC.Controllers
             var music = db.BAIHATs.Take(1).ToList();
             return View(music);
         }
+        public ActionResult TopView()
+        {
+            var music = db.BAIHATs.OrderByDescending(b => b.luotxem).ToList();
+            return View(music);
+        }
+        public ActionResult TopLike()
+        {
+            var music = db.BAIHATs.OrderByDescending(b => b.luotthich).ToList();
+            return View(music);
+        }
     }
 }
