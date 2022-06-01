@@ -45,6 +45,8 @@ namespace MUSIC.Models
         public string lyrics { get; set; }
 
         public int? luotthich { get; set; }
+        public int? luotxem { get; set; }
+
 
         public virtual ALBUM ALBUM { get; set; }
 

@@ -19,7 +19,7 @@ namespace MUSIC.Models
         public int idbaihat { get; set; }
 
         //public bool? like { get; set; }
-        public int like { get; set; }
+        public bool thich { get; set; }
 
 
         public virtual BAIHAT BAIHAT { get; set; }

@@ -147,15 +147,13 @@ namespace MUSIC.Controllers
             CT_luotthich like = new CT_luotthich();
             BAIHAT music = db.BAIHATs.Find(idbaihat);
             
-            if (like.like==1)
+            if (like.thich = true)
             {
-                music.luotthich += 1;
-                db.Entry(music).State = EntityState.Modified;
-                db.SaveChanges();
+                db.BAIHATs.SqlQuery("update BAIHAT set luotthich = luotthich + 1 where idbaihat like " + idbaihat );
             }
             like.TenDN = kh.TenDN;
             like.idbaihat = idbaihat;
-            like.like = 1;
+            like.thich = true;
 
             db.CT_luotthich.Add(like);
             db.SaveChanges();

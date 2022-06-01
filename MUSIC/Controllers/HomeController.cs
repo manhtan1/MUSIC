@@ -1,6 +1,7 @@
 ﻿using MUSIC.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,6 +16,7 @@ namespace MUSIC.Controllers
 
             return View(db.BAIHATs.ToList());
         }
+        
         [HttpGet]
         public ActionResult DetailsMusic(int id)
         {
@@ -23,9 +25,14 @@ namespace MUSIC.Controllers
             {
                 return HttpNotFound();
             }
-
+            /* db.BAIHATs.SqlQuery("update BAIHAT set luotxem = luotxem + 1 ").Where(n => n.idbaihat == id).ToList();*/
+            music.luotxem += 1;
+            db.Entry(music).State = EntityState.Modified;
+            db.SaveChanges();
             return View(music);
         }
+       
+        
         public ActionResult Search()
         {
             return View();
