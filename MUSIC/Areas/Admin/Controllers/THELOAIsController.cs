@@ -48,6 +48,8 @@ namespace MUSIC.Areas.Admin.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult Create(THELOAI tHELOAI)
         {
+            Random rnd = new Random();
+            int idtl = rnd.Next(1,300);
             if (string.IsNullOrEmpty(tHELOAI.tentheloai) == true)
             {
                 ModelState.AddModelError("", "Tên thể loại không được null");
@@ -61,18 +63,25 @@ namespace MUSIC.Areas.Admin.Controllers
                 tHELOAI.hinhtheloai = "/images/theloainhac/" + fileName;
                 tHELOAI.ImgTheLoai.SaveAs(Path.Combine(Server.MapPath("~/images/theloainhac/"), fileName));
             }
-            db.THELOAIs.Add(tHELOAI);
-                db.SaveChanges();
-            if (tHELOAI.idtheloai > 0)
-            {
-                return RedirectToAction("Index");
+                if (idtl == tHELOAI.idtheloai)
+                {
+                    idtl = rnd.Next();
+                    idtl= tHELOAI.idtheloai ;
+                db.THELOAIs.Add(tHELOAI);
+                
             }
-            else
-            {
-                ModelState.AddModelError("", "Không thể lưu vào cơ sở dữ liệu");
-                return View(tHELOAI);
-            }
-            
+            db.SaveChanges();
+            return RedirectToAction("Index");
+            /* if (tHELOAI.idtheloai > 0)
+             {
+                 return RedirectToAction("Index");
+             }
+             else
+             {
+                 ModelState.AddModelError("", "Không thể lưu vào cơ sở dữ liệu");
+                 return View(tHELOAI);
+             }*/
+
 
         }
 
@@ -91,14 +100,12 @@ namespace MUSIC.Areas.Admin.Controllers
             ViewBag.idchude = new SelectList(db.CHUDEs, "idchude", "tenchude", tHELOAI.idchude);
             return View(tHELOAI);
         }
-
-        // POST: Admin/THELOAIs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit( THELOAI tHELOAI)
         {
+            var updatetl = db.THELOAIs.Find(tHELOAI.idtheloai);
+            
             if (tHELOAI.ImgTheLoai != null)
             {
                 string fileName = Path.GetFileNameWithoutExtension(tHELOAI.ImgTheLoai.FileName);
@@ -106,8 +113,12 @@ namespace MUSIC.Areas.Admin.Controllers
                 fileName = fileName + extension;
                 tHELOAI.hinhtheloai = "/images/theloainhac/" + fileName;
                 tHELOAI.ImgTheLoai.SaveAs(Path.Combine(Server.MapPath("~/images/theloainhac/"), fileName));
+                
             }
-            db.Entry(tHELOAI).State = EntityState.Modified;
+            updatetl.idchude = tHELOAI.idchude;
+            updatetl.tentheloai = tHELOAI.tentheloai;
+            updatetl.hinhtheloai = tHELOAI.hinhtheloai;
+            db.Entry(updatetl).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             

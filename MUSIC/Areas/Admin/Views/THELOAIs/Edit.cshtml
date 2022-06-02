@@ -26,7 +26,7 @@
                     <select name="idchude">
                         @foreach (var i in chude)
                         {
-                            <option value="@i.idchude">@i.tenchude</option>
+                            <option value="@i.idchude" @Html.Raw(i.idchude==Model.idchude?"selected":"")>@i.tenchude</option>
                         }
 
                     </select>

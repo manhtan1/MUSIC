@@ -116,6 +116,19 @@ namespace MUSIC.Controllers
             }
             return View();
         }
+        public ActionResult Dangxuat()
+        {
+            THANHVIEN kh = (THANHVIEN)Session["TaiKhoan"];
+            if (Session["TaiKhoan"] != null)
+            {
+                Session["TaiKhoan"] = null;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return RedirectToAction("DangNhap", "NguoiDung");
+            }
+        }
 
         public ActionResult Cmt(int idbaihat, FormCollection collection)
         {
@@ -165,7 +178,12 @@ namespace MUSIC.Controllers
             return RedirectToAction("Index","Home");
 
         }
-        
+        public ActionResult listlikeuser()
+        {
+            THANHVIEN kh = (THANHVIEN)Session["TaiKhoan"];
+            return View(db.CT_luotthich.Where(n => n.TenDN == kh.TenDN).ToList());
+        }
+
 
     }
 }
