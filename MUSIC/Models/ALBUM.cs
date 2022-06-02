@@ -1,4 +1,4 @@
-namespace MUSIC.Models
+﻿namespace MUSIC.Models
 {
     using System;
     using System.Collections.Generic;
@@ -17,14 +17,19 @@ namespace MUSIC.Models
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Display(Name ="ID ALBLUM")]
         public int idalbum { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Tên ALBLUM")]
+
         public string tenalbum { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Tên ca sĩ ")]
+
         public string tencasialbum { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

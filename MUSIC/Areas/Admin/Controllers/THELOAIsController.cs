@@ -63,24 +63,20 @@ namespace MUSIC.Areas.Admin.Controllers
                 tHELOAI.hinhtheloai = "/images/theloainhac/" + fileName;
                 tHELOAI.ImgTheLoai.SaveAs(Path.Combine(Server.MapPath("~/images/theloainhac/"), fileName));
             }
-                if (idtl == tHELOAI.idtheloai)
-                {
-                    idtl = rnd.Next();
-                    idtl= tHELOAI.idtheloai ;
-                db.THELOAIs.Add(tHELOAI);
-                
-            }
+
+            idtl = rnd.Next(300);
+            tHELOAI.idtheloai = idtl;
+            db.THELOAIs.Add(tHELOAI);
             db.SaveChanges();
-            return RedirectToAction("Index");
-            /* if (tHELOAI.idtheloai > 0)
-             {
-                 return RedirectToAction("Index");
-             }
-             else
-             {
-                 ModelState.AddModelError("", "Không thể lưu vào cơ sở dữ liệu");
-                 return View(tHELOAI);
-             }*/
+            if (tHELOAI.idtheloai > 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Không thể lưu vào cơ sở dữ liệu");
+                return View(tHELOAI);
+            }
 
 
         }

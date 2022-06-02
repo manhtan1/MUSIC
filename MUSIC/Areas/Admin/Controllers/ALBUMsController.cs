@@ -38,7 +38,7 @@ namespace MUSIC.Areas.Admin.Controllers
         // GET: Admin/ALBUMs/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new ALBUM { });
         }
 
         // POST: Admin/ALBUMs/Create
@@ -46,7 +46,7 @@ namespace MUSIC.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idalbum,tenalbum,tencasialbum")] ALBUM aLBUM)
+        public ActionResult Create( ALBUM aLBUM)
         {
             if (ModelState.IsValid)
             {
@@ -54,8 +54,15 @@ namespace MUSIC.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(aLBUM);
+            if (aLBUM.idalbum > 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Không thể lưu vào cơ sở dữ liệu");
+                return View(aLBUM);
+            }
         }
 
         // GET: Admin/ALBUMs/Edit/5
@@ -82,7 +89,10 @@ namespace MUSIC.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(aLBUM).State = EntityState.Modified;
+                var tl = db.ALBUMs.Find(aLBUM.idalbum);
+                tl.tenalbum = aLBUM.tenalbum;
+                tl.tencasialbum = aLBUM.tencasialbum;
+                db.Entry(tl).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
