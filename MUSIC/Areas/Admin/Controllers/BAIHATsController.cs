@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -21,7 +22,6 @@ namespace MUSIC.Areas.Admin.Controllers
             return View(bAIHATs.ToList());
         }
 
-        // GET: Admin/BAIHATs/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -54,14 +54,29 @@ namespace MUSIC.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.BAIHATs.Add(bAIHAT);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (bAIHAT.ImgBH != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(bAIHAT.ImgBH.FileName);
+                    string extension = Path.GetExtension(bAIHAT.ImgBH.FileName);
+                    fileName = fileName + extension;
+                    bAIHAT.hinhbaihat = "/images/theloainhac/" + fileName;
+                    bAIHAT.ImgBH.SaveAs(Path.Combine(Server.MapPath("~/images/nhacsi/"), fileName));
+                }else if (bAIHAT.Audio != null)
+                {
+                    string filename = Path.GetFileNameWithoutExtension(bAIHAT.Audio.FileName);
+                    string extensions = Path.GetExtension(bAIHAT.Audio.FileName);
+                    filename = filename + extensions;
+                    bAIHAT.linkbaihat = "/music/" + filename;
+                    bAIHAT.Audio.SaveAs(Path.Combine(Server.MapPath("~/music/"), filename));
+                } else
+                {
+                    bAIHAT.casi = bAIHAT.PLAYLIST.ten;
+                    db.BAIHATs.Add(bAIHAT);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
 
-            ViewBag.idalbum = new SelectList(db.ALBUMs, "idalbum", "tenalbum", bAIHAT.idalbum);
-            ViewBag.idplaylist = new SelectList(db.PLAYLISTs, "idplaylist", "ten", bAIHAT.idplaylist);
-            ViewBag.idtheloai = new SelectList(db.THELOAIs, "idtheloai", "tentheloai", bAIHAT.idtheloai);
             return View(bAIHAT);
         }
 
