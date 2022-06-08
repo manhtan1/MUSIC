@@ -16,7 +16,6 @@
     @{
         MUSIC.Models.DBcontent db = new MUSIC.Models.DBcontent();
         var ab = db.ALBUMs.ToList();
-        var cd = db.CHUDEs.ToList();
         var cs = db.PLAYLISTs.ToList();
         var tl = db.THELOAIs.ToList();
     }
@@ -98,9 +97,10 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.linkbaihat, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-5">
-                <input type="file" name="Audio" value="" />
-            </div>
+            <form action="UploadFile" enctype="multipart/form-data">
+                <input type="file" id="FileUploadSound" name="ImgBH" value="" />
+                <button></button>
+            </form>
         </div>
     </div>
 

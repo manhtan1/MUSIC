@@ -10,178 +10,184 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-<div class="player">
-    <!-- Dashboard -->
-    <div class="dashboard">
+<div class="backgraoundnen">
+    <div class="player">
+        <!-- Dashboard -->
         <!-- Header -->
-        @foreach (var i in Model)
-        {
-            <header>
-                <h4>@i.tenbaihat</h4>
-                <h2>@i.casi</h2>
-            </header>
-
-            <!-- CD -->
-            <div class="cd">
-                <div class="cd-thumb" style=" background-image: url(@i.hinhbaihat)">
-                </div>
-            </div>
-
-            <!-- Control -->
-            <div class="control">
-                <div class="btn btn-repeat">
-                    <i class="fas fa-redo"></i>
-                </div>
-                <div class="btn btn-prev">
-                    <i class="fas fa-step-backward"></i>
-                </div>
-                <div class="btn btn-toggle-play">
-                    <i class="fas fa-pause icon-pause"></i>
-                    <i class="fas fa-play icon-play"></i>
-                </div>
-                <div class="btn btn-next">
-                    <i class="fas fa-step-forward"></i>
-                </div>
-                <div class="btn btn-random">
-                    <i class="fas fa-random"></i>
-                </div>
-            </div>
-
-            <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
-
-            <audio id="audio" for="progress" hidden controls>
-                <source src="@i.linkbaihat">
-            </audio>
-        }
-
-    </div>
-
-    <!-- Playlist -->
-    <div class="playlist">
-        @{ 
-            MUSIC.Models.DBcontent db = new MUSIC.Models.DBcontent();
-            
-        }
         @foreach (var item in Model)
         {
-            <div class="song">
-                <div class="thumb"
-                     style="background-image: url('@item.hinhbaihat')">
+            <div class="dashboard">
+
+                <header>
+
+                    <h4>@item.casi</h4>
+
+                    <h2>@item.tenbaihat</h2>
+
+                </header>
+
+
+                <!-- CD -->
+
+                <div class="cd">
+                    <div class="cd-thumb" style=" background-image: url(@item.hinhbaihat)">
+                    </div>
                 </div>
-                <div class="body">
-                    <h3 class="title">@item.casi</h3>
-                    <p class="author">@item.tenbaihat</p>
+
+                <!-- Control -->
+                <div class="control">
+                    <div class="btn btn-repeat">
+                        <i class="fas fa-redo"></i>
+                    </div>
+                    <div class="btn btn-prev">
+                        <i class="fas fa-step-backward"></i>
+                    </div>
+                    <div class="btn btn-toggle-play">
+                        <i class="fas fa-pause icon-pause"></i>
+                        <i class="fas fa-play icon-play"></i>
+                    </div>
+                    <div class="btn btn-next">
+                        <i class="fas fa-step-forward"></i>
+                    </div>
+                    <div class="btn btn-random">
+                        <i class="fas fa-random"></i>
+                    </div>
                 </div>
-                <div class="option">
-                    <i class="fas fa-ellipsis-h"></i>
-                </div>
+
+                <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
+
+                <audio id="audio" for="progress" hidden controls>
+                    <source src="@item.linkbaihat">
+                </audio>
+
             </div>
         }
+        <!-- Playlist -->
+        <div class="playlist">
+            @{
+                MUSIC.Models.DBcontent db = new MUSIC.Models.DBcontent();
+                int stt = 1;
+            }
+            @foreach (var item in db.BAIHATs.ToList())
+            {
+                <a class="song " href="/music/Baihat/@item.idbaihat">
+                    <span>@stt</span>
+                    <div class="thumb"
+                         style="background-image: url('@item.hinhbaihat')">
+                    </div>
+                    <div class="body">
+                        <h3 class="title">@item.tenbaihat</h3>
+                        <p class="author">@item.casi</p>
+                    </div>
+                    <div class="option">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                </a>
+                stt++;
+
+            }
+        </div>
     </div>
 </div>
 
 <!-- Design from: https://static.collectui.com/shots/3671744/musicloud-revolutionary-app-for-music-streaming-large -->
 <style>
     :root {
-        --primary-color: #ec1f55;
+                    --primary-color: #ec1f55;
         --text-color: #333;
     }
+    .backgraoundnen {
+                    background-image: url(/images/nenbody.jpg);
+                    background-repeat: none;
+                }
 
-    * {
-        padding: 0;
-        margin: 0;
-        box-sizing: inherit;
-    }
-
-    body {
-        background-color: #f5f5f5;
-    }
-
-    html {
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-    }
+                * {
+                padding: 0;
+                margin: 0;
+                    box-sizing: inherit;
+                }
 
     .player {
-        position: relative;
-        max-width: 480px;
-        margin: 0 auto;
-    }
+                position: relative;
+                    max-width: 480px;
+                margin: 0 auto;
+
+                }
 
         .player .icon-pause {
-            display: none;
-        }
+                display: none;
+                }
 
         .player.playing .icon-pause {
-            display: inline-block;
-        }
+                display: inline-block;
+                }
 
         .player.playing .icon-play {
-            display: none;
-        }
+                display: none;
+                }
 
     .dashboard {
-        padding: 16px 16px 14px;
-        background-color: #fff;
+                padding: 16px 16px 14px;
+                    background-color: #fff;
         top: 0;
-        width: 100%;
-        max-width: 480px;
-        border-bottom: 1px solid #ebebeb;
+                width: 100%;
+                    max-width: 480px;
+                    border-bottom: 1px solid #ebebeb;
     }
 
-    /* HEADER */
-    header {
-        text-align: center;
-        margin-bottom: 10px;
-    }
+                /* HEADER */
+                header {
+                    text-align: center;
+                    margin-bottom: 10px;
+                }
 
-        header h4 {
-            color: var(--primary-color);
-            font-size: 12px;
-        }
+                header h4 {
+                    color: var(--primary-color);
+                    font-size: 12px;
+                }
 
-        header h2 {
-            color: var(--text-color);
-            font-size: 20px;
-        }
+                header h2 {
+                    color: var(--text-color);
+                    font-size: 20px;
+                }
 
     /* CD */
     .cd {
-        display: flex;
-        margin: auto;
-        width: 200px;
-    }
+                display: flex;
+                margin: auto;
+                width: 200px;
+                }
 
     .cd-thumb {
-        width: 100%;
-        padding-top: 100%;
-        border-radius: 50%;
-        background-color: #333;
+                width: 100%;
+                    padding-top: 100%;
+                    border-radius: 50%;
+                    background-color: #333;
         background-size: cover;
-        margin: auto;
-    }
+                margin: auto;
+                }
 
     /* CONTROL */
     .control {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        padding: 18px 0 8px 0;
-    }
+                display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                padding: 18px 0 8px 0;
+                }
 
         .control .btn {
-            color: #666;
+                color: #666;
             padding: 18px;
-            font-size: 18px;
-        }
+                    font-size: 18px;
+                }
 
             .control .btn.active {
                 color: var(--primary-color);
-            }
+                }
 
         .control .btn-toggle-play {
-            width: 56px;
-            height: 56px;
+            max-width: 56px;
+            max-height: 56px;
             border-radius: 50%;
             font-size: 24px;
             color: #fff;
@@ -189,31 +195,34 @@
             align-items: center;
             justify-content: center;
             background-color: var(--primary-color);
-        }
+
+                }
 
     .progress {
-        width: 100%;
-        -webkit-appearance: none;
-        height: 6px;
-        background: #d3d3d3;
+                width: 100%;
+                    -webkit-appearance: none;
+                height: 6px;
+                background: #d3d3d3;
         outline: none;
-        opacity: 0.7;
-        -webkit-transition: 0.2s;
-        transition: opacity 0.2s;
-    }
+                opacity: 0.7;
+                    -webkit-transition: 0.2s;
+                transition: opacity 0.2s;
+                }
 
         .progress::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 12px;
-            height: 6px;
-            background-color: var(--primary-color);
-            cursor: pointer;
-        }
+                    -webkit-appearance: none;
+                appearance: none;
+                width: 12px;
+                height: 6px;
+                    background-color: var(--primary-color);
+                cursor: pointer;
+                }
 
     /* PLAYLIST */
     .playlist {
-        padding: 12px;
+       @* padding: 12px;*@
+        min-width:512px;
+        margin:12px 0;
     }
 
     .song {
@@ -268,13 +277,29 @@
             color: #999;
             font-size: 18px;
         }
+    .playlist a {
+        text-decoration: none;
+    }
 </style>
-<script>
-    // Một số bài hát có thể bị lỗi do liên kết bị hỏng. Vui lòng thay thế liên kết khác để có thể phát
-    // Some songs may be faulty due to broken links. Please replace another link so that it can be played
+<script type="text/javascript" src="http://www.google.com/jsapi?key=INSERT-YOUR-KEY"></script>
+<script type="text/javascript">
+    google.load("jquery", "1.4.1");
+    google.load("swfobject", "2.2");
+    google.load('maps', '2', { 'callback': googleMapSetup });
+    $(document).ready(function ($) {
+        $(document).on('submit', '#submit-form', function (event) {
+            event.preventDefault();
 
-    //const $ = document.querySelector.bind(document);
-    //const $$ = document.querySelectorAll.bind(document);
+            alert('page did not reload');
+        });
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+
+<script>
+    @*const $ = document.querySelector.bind(document);
+    const $$ = document.querySelectorAll.bind(document);*@
 
     const PlAYER_STORAGE_KEY = "F8_PLAYER";
 
@@ -290,32 +315,23 @@
     const randomBtn = document.querySelector(".btn-random");
     const repeatBtn = document.querySelector(".btn-repeat");
     const playlist = document.querySelector(".playlist");
-    const app = {
+    const song = document.querySelector(".song");
 
+
+    const app = {
         currentIndex: 0,
         isPlaying: false,
         isRandom: false,
         isRepeat: false,
         config: {},
-        // (1/2) Uncomment the line below to use localStorage
-        // config: JSON.parse(localStorage.getItem(PlAYER_STORAGE_KEY)) || {},
 
-        ,
+
         setConfig: function (key, value) {
             this.config[key] = value;
             // (2/2) Uncomment the line below to use localStorage
             // localStorage.setItem(PlAYER_STORAGE_KEY, JSON.stringify(this.config));
         },
-        render: function () {
 
-
-            const htmls = this.songs.map((song, index) => {
-                return 
-                   
-                    ;
-            });
-            playlist.innerHTML = htmls.join("");
-        },
         defineProperties: function () {
             Object.defineProperty(this, "currentSong", {
                 get: function () {
@@ -414,6 +430,7 @@
                 _this.render();
                 _this.scrollToActiveSong();
             };
+
 
             // Xử lý bật / tắt random song
             // Handling on / off random song
@@ -531,5 +548,5 @@
     };
 
     app.start();
-
 </script>
+

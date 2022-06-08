@@ -4,9 +4,11 @@ using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using Microsoft.AspNetCore.Hosting;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNetCore.Http;
 using MUSIC.Models;
 
 namespace MUSIC.Areas.Admin.Controllers
@@ -14,6 +16,7 @@ namespace MUSIC.Areas.Admin.Controllers
     public class BAIHATsController : Controller
     {
         private DBcontent db = new DBcontent();
+        private IHostingEnvironment Environment;
 
         // GET: Admin/BAIHATs
         public ActionResult Index()
@@ -44,41 +47,43 @@ namespace MUSIC.Areas.Admin.Controllers
             ViewBag.idtheloai = new SelectList(db.THELOAIs, "idtheloai", "tentheloai");
             return View();
         }
-
-        // POST: Admin/BAIHATs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idbaihat,idtheloai,idalbum,idplaylist,tenbaihat,hinhbaihat,casi,linkbaihat")] BAIHAT bAIHAT)
+        public ActionResult Create(BAIHAT bAIHAT, HttpPostedFileBase postedFile)
         {
-            if (ModelState.IsValid)
+            if (bAIHAT.ImgBH != null)
             {
-                if (bAIHAT.ImgBH != null)
-                {
-                    string fileName = Path.GetFileNameWithoutExtension(bAIHAT.ImgBH.FileName);
-                    string extension = Path.GetExtension(bAIHAT.ImgBH.FileName);
-                    fileName = fileName + extension;
-                    bAIHAT.hinhbaihat = "/images/theloainhac/" + fileName;
-                    bAIHAT.ImgBH.SaveAs(Path.Combine(Server.MapPath("~/images/nhacsi/"), fileName));
-                }else if (bAIHAT.Audio != null)
-                {
-                    string filename = Path.GetFileNameWithoutExtension(bAIHAT.Audio.FileName);
-                    string extensions = Path.GetExtension(bAIHAT.Audio.FileName);
-                    filename = filename + extensions;
-                    bAIHAT.linkbaihat = "/music/" + filename;
-                    bAIHAT.Audio.SaveAs(Path.Combine(Server.MapPath("~/music/"), filename));
-                } else
-                {
-                    bAIHAT.casi = bAIHAT.PLAYLIST.ten;
-                    db.BAIHATs.Add(bAIHAT);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                string fileName = Path.GetFileNameWithoutExtension(bAIHAT.ImgBH.FileName);
+                string extension = Path.GetExtension(bAIHAT.ImgBH.FileName);
+                fileName = fileName + extension;
+                bAIHAT.hinhbaihat = "/images/theloainhac/" + fileName;
+                bAIHAT.ImgBH.SaveAs(Path.Combine(Server.MapPath("~/images/nhacsi/"), fileName));
             }
 
-            return View(bAIHAT);
+            linknhac(postedFile);
+
+             PLAYLIST pLAYLIST = db.PLAYLISTs.Find(bAIHAT.idplaylist);
+            bAIHAT.casi = pLAYLIST.ten;
+            bAIHAT.luotthich = 0;
+            bAIHAT.luotxem = 0;
+            db.BAIHATs.Add(bAIHAT);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
         }
+        public string linknhac(HttpPostedFileBase postedFile)
+        {
+            BAIHAT bAIHAT = new BAIHAT();
+            
+                string fileName = Path.GetFileNameWithoutExtension(postedFile.FileName);
+                string extension = Path.GetExtension(postedFile.FileName);
+                fileName = fileName + extension;
+                bAIHAT.linkbaihat =  fileName;
+                postedFile.SaveAs(Path.Combine(Server.MapPath("~/music/"), fileName));
+            return bAIHAT.linkbaihat;
+        }
+
+       
 
         // GET: Admin/BAIHATs/Edit/5
         public ActionResult Edit(int? id)
@@ -97,10 +102,6 @@ namespace MUSIC.Areas.Admin.Controllers
             ViewBag.idtheloai = new SelectList(db.THELOAIs, "idtheloai", "tentheloai", bAIHAT.idtheloai);
             return View(bAIHAT);
         }
-
-        // POST: Admin/BAIHATs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idbaihat,idtheloai,idalbum,idplaylist,tenbaihat,hinhbaihat,casi,linkbaihat")] BAIHAT bAIHAT)
@@ -116,8 +117,6 @@ namespace MUSIC.Areas.Admin.Controllers
             ViewBag.idtheloai = new SelectList(db.THELOAIs, "idtheloai", "tentheloai", bAIHAT.idtheloai);
             return View(bAIHAT);
         }
-
-        // GET: Admin/BAIHATs/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -131,8 +130,6 @@ namespace MUSIC.Areas.Admin.Controllers
             }
             return View(bAIHAT);
         }
-
-        // POST: Admin/BAIHATs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

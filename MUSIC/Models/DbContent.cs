@@ -8,7 +8,7 @@ namespace MUSIC.Models
     public partial class DBcontent : DbContext
     {
         public DBcontent()
-            : base("name=DBcontent")
+            : base("name=DBcontent1")
         {
         }
 

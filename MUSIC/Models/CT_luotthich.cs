@@ -18,9 +18,7 @@ namespace MUSIC.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int idbaihat { get; set; }
 
-        //public bool? like { get; set; }
         public bool thich { get; set; }
-
 
         public virtual BAIHAT BAIHAT { get; set; }
 

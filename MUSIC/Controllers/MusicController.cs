@@ -15,10 +15,15 @@ namespace MUSIC.Controllers
         {
             return db.BAIHATs.OrderByDescending(a => a.idbaihat).Take(n).ToList();
         }
-        public ActionResult BaiHat()
+        public ActionResult BaiHat(int id)
         {
-            var music = db.BAIHATs.Take(1).ToList();
-            return View(music);
+            if (String.IsNullOrEmpty(id.ToString()))
+            {
+                id = 1;
+                return View(db.BAIHATs.Where(n=>n.idbaihat==id));
+            }
+            return View(db.BAIHATs.Where(n => n.idbaihat == id));
+            /*return View(db.BAIHATs.OrderByDescending(b => b.luotxem).ToList());*/
         }
         public ActionResult TopView()
         {
@@ -30,5 +35,6 @@ namespace MUSIC.Controllers
             var music = db.BAIHATs.OrderByDescending(b => b.luotthich).ToList();
             return View(music);
         }
+        
     }
 }

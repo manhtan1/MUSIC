@@ -21,6 +21,7 @@ namespace MUSIC.Models
         [Column("comment")]
         public string comment1 { get; set; }
 
+        [Column(TypeName = "date")]
         public DateTime? ngaycmt { get; set; }
 
         public virtual BAIHAT BAIHAT { get; set; }
