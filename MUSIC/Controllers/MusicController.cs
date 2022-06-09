@@ -35,6 +35,29 @@ namespace MUSIC.Controllers
             var music = db.BAIHATs.OrderByDescending(b => b.luotthich).ToList();
             return View(music);
         }
+        [HttpPost]
+        public ActionResult nextsong(int id)
+        {
+            id += 1;
+            var songs = db.BAIHATs.ToList();
+            if (id > songs.Count)
+            {
+                id = 1;
+            }
+            return RedirectToAction("Baihat/"+id);
+        }
         
+            [HttpPost]
+        public ActionResult prevsong(int id)
+        {
+            id -= 1;
+            var songs = db.BAIHATs.ToList();
+            if (id <= 0)
+            {
+                id = songs.Count;
+            }
+            return RedirectToAction("Baihat/" + id);
+        }
+
     }
 }

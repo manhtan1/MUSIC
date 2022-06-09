@@ -39,16 +39,22 @@
                     <div class="btn btn-repeat">
                         <i class="fas fa-redo"></i>
                     </div>
-                    <div class="btn btn-prev">
-                        <i class="fas fa-step-backward"></i>
-                    </div>
+                    <form action="/music/prevsong/@item.idbaihat" method="post">
+                        <button class="btn  btn-song-next-prev" type="submit">
+                            <i class="fas fa-step-backward"></i>
+                        </button>
+                    </form>
+
                     <div class="btn btn-toggle-play">
                         <i class="fas fa-pause icon-pause"></i>
                         <i class="fas fa-play icon-play"></i>
                     </div>
-                    <div class="btn btn-next">
-                        <i class="fas fa-step-forward"></i>
-                    </div>
+                    <form action="/music/nextsong/@item.idbaihat" method="post">
+                        <button class="btn  btn-song-next-prev" type="submit">
+                            <i class="fas fa-step-forward"></i>
+                        </button>
+
+                    </form>
                     <div class="btn btn-random">
                         <i class="fas fa-random"></i>
                     </div>
@@ -63,35 +69,42 @@
             </div>
         }
         <!-- Playlist -->
-        <div class="playlist">
-            @{
-                MUSIC.Models.DBcontent db = new MUSIC.Models.DBcontent();
-                int stt = 1;
-            }
-            @foreach (var item in db.BAIHATs.ToList())
-            {
-                <a class="song " href="/music/Baihat/@item.idbaihat">
-                    <span>@stt</span>
-                    <div class="thumb"
-                         style="background-image: url('@item.hinhbaihat')">
-                    </div>
-                    <div class="body">
-                        <h3 class="title">@item.tenbaihat</h3>
-                        <p class="author">@item.casi</p>
-                    </div>
-                    <div class="option">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </div>
-                </a>
-                stt++;
+    <div class="playlist">
+        @{
+            MUSIC.Models.DBcontent db = new MUSIC.Models.DBcontent();
+            int stt = 1;
+        }
+        @foreach (var item in db.BAIHATs.ToList())
+        {
+            <a class="song " data-id="@item.idbaihat" href="/music/Baihat/@item.idbaihat">
+                <span>@stt</span>
+                <div class="thumb"
+                     style="background-image: url('@item.hinhbaihat')">
+                </div>
+                <div class="body">
+                    <h3 class="title">@item.tenbaihat</h3>
+                    <p class="author">@item.casi</p>
+                </div>
+                <div class="option">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
 
-            }
-        </div>
+            </a>
+
+            stt++;
+
+        }
+    </div>
     </div>
 </div>
 
 <!-- Design from: https://static.collectui.com/shots/3671744/musicloud-revolutionary-app-for-music-streaming-large -->
 <style>
+    .btn-song-next-prev {
+        border: none;
+        background: #fff;
+    }
+    
     :root {
                     --primary-color: #ec1f55;
         --text-color: #333;
@@ -282,24 +295,25 @@
     }
 </style>
 <script type="text/javascript" src="http://www.google.com/jsapi?key=INSERT-YOUR-KEY"></script>
-<script type="text/javascript">
-    google.load("jquery", "1.4.1");
-    google.load("swfobject", "2.2");
-    google.load('maps', '2', { 'callback': googleMapSetup });
+@*<script type="text/javascript">
     $(document).ready(function ($) {
-        $(document).on('submit', '#submit-form', function (event) {
-            event.preventDefault();
-
-            alert('page did not reload');
-        });
+        $('.song').on('click', function (e) {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/Music/Baihat/id}',
+                type: 'GETS',
+                data: { id: id },
+                success: function (rs) {
+                    rs.success;
+                }
+            });
+        })
     });
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</script>*@
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 
 <script>
-    @*const $ = document.querySelector.bind(document);
-    const $$ = document.querySelectorAll.bind(document);*@
 
     const PlAYER_STORAGE_KEY = "F8_PLAYER";
 
@@ -489,9 +503,20 @@
             }, 300);
         },
         loadCurrentSong: function () {
-            heading.textContent = this.currentSong.name;
+            @{
+                var song = db.BAIHATs.Where(n=>n.idbaihat==stt);
+                MUSIC.Models.BAIHAT bAIHAT = new MUSIC.Models.BAIHAT();
+
+            }--><!----><!---->-->
+            <!---->--><!--@*if (@bAIHAT.idbaihat== this.currentIndex) {
+                heading.textContent =@bAIHAT.tenbaihat;
+                cdThumb.style.backgroundImage = `url('${@bAIHAT.hinhbaihat}')`;
+                audio.src = @bAIHAT.linkbaihat;
+            }*@-->-->
+            <!--heading.textContent = this.currentSong.name;
             cdThumb.style.backgroundImage = `url('${this.currentSong.image}')`;
             audio.src = this.currentSong.path;
+
         },
         loadConfig: function () {
             this.isRandom = this.config.isRandom;
@@ -499,7 +524,10 @@
         },
         nextSong: function () {
             this.currentIndex++;
-            if (this.currentIndex >= this.songs.length) {
+            @{
+                var songs = db.BAIHATs.ToList();
+            }
+            if (this.currentIndex >= @songs.Count) {
                 this.currentIndex = 0;
             }
             this.loadCurrentSong();

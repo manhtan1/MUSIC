@@ -1974,7 +1974,6 @@
     <Content Include="music\vonguoita.mp3" />
     <Content Include="Assetss\Customer\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />
-    <Content Include="Scripts\loadmussicScript.js" />
     <Content Include="Scripts\modernizr.js" />
     <Content Include="Scripts\scripts.js" />
     <Content Include="Scripts\sidemenu.js" />
