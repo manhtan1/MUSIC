@@ -1,0 +1,318 @@
+﻿@using MUSIC.Models;
+@{
+    ViewBag.Title = "ThongtinUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Assetss/Customer/css/user.css" rel="stylesheet" />
+<div class="app">
+    <div class="app__container">
+        <div class="grid">
+            <div class="grid__row app__content">
+                <div class="gird-column-2">
+                    <div class="category">
+                        <h3 class="category__heading">
+                            Danh Mục
+                        </h3>
+                        <ul class="category-list">
+                            <li class="category-item category-item--active">
+                                <a href="" class="category-item__link">Thông tin cá nhân</a>
+                            </li>
+                            <li class="category-item">
+                                <a href="/Nguoidung/listlikeuser" class="category-item__link">Bài nhạc yêu thích</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="gird-column-10">
+                    <div class="home-product">
+                        <div class="gird-row">
+                            <div class="gird-column-5 block__">
+                                <h3 class="" href="#">
+                                    Danh sách nghe gần đây nhất
+                                </h3>
+                                <div class="playlist">
+                                    @{
+                                        MUSIC.Models.DBcontent db = new MUSIC.Models.DBcontent();
+                                        var lstNhac = (List<Listening>)Session["Listen"];
+                                        if (lstNhac == null)
+                                        {
+                                            lstNhac = new List<Listening>();
+                                            Session["Listen"] = lstNhac;
+                                        }
+                                        var session = (MUSIC.Models.THANHVIEN)Session["TaiKhoan"];
+
+
+                                    }
+                                    @if (Session == null)
+                                    {
+                                        <h3>Tạm thời chưa có bài nào nghe gần đây</h3>
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in db.CT_luotthich.Where(n => n.TenDN == session.TenDN).ToList())
+                                        {
+                                            <a class="song " onclick="loadsong(@item.idbaihat)">
+                                                <div class="thumb"
+                                                     style="background-image: url('@item.BAIHAT.hinhbaihat')">
+                                                </div>
+                                                <div class="body">
+                                                    <h3 class="title">@item.BAIHAT.tenbaihat</h3>
+                                                    <p class="author">@item.BAIHAT.casi</p>
+                                                </div>
+                                                <div class="option">
+                                                    <i class="fas fa-ellipsis-h"></i>
+                                                </div>
+
+                                            </a>
+
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="gird-column-5 block__">
+                                <h3 class="" href="#">
+                                    Danh sách nghe gần đây nhất
+                                </h3>
+                                <div class="playlist">
+                                   
+                                    @if (Session == null)
+                                    {
+                                        <h3>Tạm thời chưa có bài nào nghe gần đây</h3>
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in lstNhac)
+                                        {
+                                            <a class="song " onclick="loadsong(@item.idbaihat)">
+                                                @*href="@Url.Action("ThemNhac", "Listened", new { @id = item.idbaihat, @strURL = Request.Url.ToString() })"*@
+                                                <div class="thumb"
+                                                     style="background-image: url('@item.hinhbaihat')">
+                                                </div>
+                                                <div class="body">
+                                                    <h3 class="title">@item.tenbaihat</h3>
+                                                    <p class="author">@item.casi</p>
+                                                </div>
+                                                <div class="option">
+                                                    <i class="fas fa-ellipsis-h"></i>
+                                                </div>
+
+                                            </a>
+
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<style>
+    .btn-song-next-prev {
+        border: none;
+        background: #fff;
+    }
+    .block__ {
+        display: inline-grid;
+    }
+
+    :root {
+        --primary-color: #ec1f55;
+        --text-color: #333;
+    }
+    .backgraoundnen {
+                    background-image: url(/images/nenbody.jpg);
+                    background-repeat: none;
+                }
+
+                * {
+                padding: 0;
+                margin: 0;
+                    box-sizing: inherit;
+                }
+
+    .player {
+                position: relative;
+                    max-width: 480px;
+                margin: 0 auto;
+
+                }
+
+        .player .icon-pause {
+                display: none;
+                }
+
+        .player.playing .icon-pause {
+                display: inline-block;
+                }
+
+        .player.playing .icon-play {
+                display: none;
+                }
+
+    .dashboard {
+                padding: 16px 16px 14px;
+                    background-color: #fff;
+        top: 0;
+                width: 100%;
+                    max-width: 480px;
+                    border-bottom: 1px solid #ebebeb;
+    }
+
+                /* HEADER */
+                header {
+                    text-align: center;
+                    margin-bottom: 10px;
+                }
+
+                header h4 {
+                    color: var(--primary-color);
+                    font-size: 12px;
+                }
+
+                header h2 {
+                    color: var(--text-color);
+                    font-size: 20px;
+                }
+
+    /* CD */
+    .cd {
+                display: flex;
+                margin: auto;
+                width: 200px;
+                }
+
+    .cd-thumb {
+                width: 100%;
+                    padding-top: 100%;
+                    border-radius: 50%;
+                    background-color: #333;
+        background-size: cover;
+                margin: auto;
+                }
+
+    /* CONTROL */
+    .control {
+                display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                padding: 18px 0 8px 0;
+                }
+        .control div{
+            cursor:pointer;
+        }
+
+        .control .btn {
+            color: #666;
+            padding: 18px;
+            font-size: 18px;
+        }
+
+            .control .btn.active {
+                color: var(--primary-color);
+                }
+
+        .control .btn-toggle-play {
+            max-width: 56px;
+            max-height: 56px;
+            border-radius: 50%;
+            font-size: 24px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-color);
+
+                }
+
+    .progress {
+                width: 100%;
+                    -webkit-appearance: none;
+                height: 6px;
+                background: #d3d3d3;
+        outline: none;
+                opacity: 0.7;
+                    -webkit-transition: 0.2s;
+                transition: opacity 0.2s;
+                }
+
+        .progress::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                appearance: none;
+                width: 12px;
+                height: 6px;
+                    background-color: var(--primary-color);
+                cursor: pointer;
+                }
+
+    /* PLAYLIST */
+    .playlist {
+       @* padding: 12px;*@
+        min-width:490px;
+        margin:12px 0;
+    }
+
+    .song {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+        background-color: #fff;
+        padding: 8px 16px;
+        border-radius: 5px;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    }
+
+        .song.active {
+            background-color: var(--primary-color);
+        }
+
+        .song:active {
+            opacity: 0.8;
+        }
+
+        .song.active .option,
+        .song.active .author,
+        .song.active .title {
+            color: #fff;
+        }
+
+        .song .thumb {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-size: cover;
+            margin: 0 8px;
+        }
+
+        .song .body {
+            flex: 1;
+            padding: 0 16px;
+        }
+
+        .song .title {
+            font-size: 18px;
+            color: var(--text-color);
+        }
+
+        .song .author {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .song .option {
+            padding: 16px 8px;
+            color: #999;
+            font-size: 18px;
+        }
+    .playlist a {
+        text-decoration: none;
+    }
+</style>
+

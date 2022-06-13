@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<MUSIC.Models.BAIHAT>
+    @using MUSIC.Models;
 @{
     ViewBag.Title = "BaiHat";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,6 +15,10 @@
         <!-- Header -->
         @foreach (var item in Model)
         {
+            @*List<Listening> listenings = Session["Listen"] as List<Listening>;
+            Listening nhac = listenings.Find(n => n.idbaihat == item.idbaihat);
+            nhac = new Listening(item.idbaihat);*@
+
             <div class="dashboard">
 
                 <header>
@@ -81,20 +86,21 @@
             }
             @foreach (var item in db.BAIHATs.ToList())
             {
-                <a class="song " data-id="@item.idbaihat" href="/music/Baihat/@item.idbaihat">
-                    <span>@stt</span>
-                    <div class="thumb"
-                         style="background-image: url('@item.hinhbaihat')">
-                    </div>
-                    <div class="body">
-                        <h3 class="title">@item.tenbaihat</h3>
-                        <p class="author">@item.casi</p>
-                    </div>
-                    <div class="option">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </div>
+            <a class="song " onclick="loadsong(@item.idbaihat)">
+                <span>@stt</span>
+                @*href="@Url.Action("ThemNhac", "Listened", new { @id = item.idbaihat, @strURL = Request.Url.ToString() })"*@
+                <div class="thumb"
+                     style="background-image: url('@item.hinhbaihat')">
+                </div>
+                <div class="body">
+                    <h3 class="title">@item.tenbaihat</h3>
+                    <p class="author">@item.casi</p>
+                </div>
+                <div class="option">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
 
-                </a>
+            </a>
 
                 stt++;
 
@@ -337,7 +343,10 @@
     const playlist = document.querySelector(".playlist");
     const song = document.querySelector(".song");
     isRandom: false;
-        isRepeat: false;
+    isRepeat: false;
+    function loadsong(id) {
+        window.location.replace("/Music/Baihat/" + id);
+    }
     function prevnext(id) {
         @{
             MUSIC.Models.DBcontent db1 = new MUSIC.Models.DBcontent();

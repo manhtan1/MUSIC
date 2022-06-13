@@ -1,0 +1,62 @@
+﻿@using MUSIC.Models
+@model List<Listening>
+@{
+    ViewBag.Title = "ListNhac";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table id="customers">
+    <tr>
+        <th>Tên bài hát</th>
+        <th>Ca sĩ</th>
+        <th>Lượt thích</th>
+        <th>Lượt truy cập</th>
+        <th>Audio</th>
+
+    </tr>
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td>@i.tenbaihat</td>
+            <td>@i.casi</td>
+            <td>@i.luotxem</td>
+            <td>@i.luotthich</td>
+            <td>
+                <audio controls>
+                    <source src="@i.linkbaihat">
+                </audio>
+            </td>
+        </tr>
+    }
+
+</table>
+<style>
+    #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 1200px;
+        margin:0 auto;
+    }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+</style>
+

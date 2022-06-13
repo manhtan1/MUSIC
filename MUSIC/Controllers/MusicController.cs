@@ -22,6 +22,18 @@ namespace MUSIC.Controllers
                 id = 1;
                 return View(db.BAIHATs.Where(n=>n.idbaihat==id));
             }
+            var lstNhac = (List<Listening>) Session["Listen"];
+            if (lstNhac == null)
+            {
+                lstNhac = new List<Listening>();
+                Session["Listen"] = lstNhac;
+            }
+            Listening nhac = lstNhac.Find(n => n.idbaihat == id);
+            if (nhac == null)
+            {
+                nhac = new Listening(id);
+                lstNhac.Add(nhac);
+            }
             return View(db.BAIHATs.Where(n => n.idbaihat == id));
             /*return View(db.BAIHATs.OrderByDescending(b => b.luotxem).ToList());*/
         }

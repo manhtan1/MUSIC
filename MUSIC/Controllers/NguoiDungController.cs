@@ -183,6 +183,12 @@ namespace MUSIC.Controllers
             THANHVIEN kh = (THANHVIEN)Session["TaiKhoan"];
             return View(db.CT_luotthich.Where(n => n.TenDN == kh.TenDN).ToList());
         }
+        public ActionResult ThongtinUser()
+        {
+            THANHVIEN kh = (THANHVIEN)Session["TaiKhoan"];
+
+            return View(kh);
+        }
 
 
     }
