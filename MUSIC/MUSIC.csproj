@@ -196,6 +196,7 @@
     <Compile Include="Areas\Admin\Controllers\PLAYLISTsController.cs" />
     <Compile Include="Areas\Admin\Controllers\THANHVIENsController.cs" />
     <Compile Include="Areas\Admin\Controllers\THELOAIsController.cs" />
+    <Compile Include="Common\MailHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MusicController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />

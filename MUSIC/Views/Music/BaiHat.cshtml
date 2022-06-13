@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Music player</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
 <div class="backgraoundnen">
     <div class="player">
         <!-- Dashboard -->
@@ -36,28 +34,35 @@
 
                 <!-- Control -->
                 <div class="control">
-                    <div class="btn btn-repeat">
+                    <div class="btn btn-repeatt">
                         <i class="fas fa-redo"></i>
                     </div>
-                    <form action="/music/prevsong/@item.idbaihat" method="post">
+                    @*<form action="/music/prevsong/@item.idbaihat" method="post">
                         <button class="btn  btn-song-next-prev" type="submit">
                             <i class="fas fa-step-backward"></i>
                         </button>
-                    </form>
-
+                    </form>*@
+                    <div onclick="prevnext(@item.idbaihat)" class="btn  btn-song-next-prev">
+                        <i class="fas fa-step-backward"></i>
+                    </div>
                     <div class="btn btn-toggle-play">
                         <i class="fas fa-pause icon-pause"></i>
                         <i class="fas fa-play icon-play"></i>
                     </div>
-                    <form action="/music/nextsong/@item.idbaihat" method="post">
-                        <button class="btn  btn-song-next-prev" type="submit">
-                            <i class="fas fa-step-forward"></i>
-                        </button>
+                    @*<form action="/music/nextsong/@item.idbaihat" method="post">
+            <button class="btn  btn-song-next-prev" type="submit">
+                <i class="fas fa-step-forward"></i>
+            </button>
 
-                    </form>
-                    <div class="btn btn-random">
+        </form>*@
+                    <div onclick="songnext(@item.idbaihat)" class="btn  btn-song-next-prev">
+                        <i class="fas fa-step-forward"></i>
+                    </div>
+                    <div class="btn btn-randomm ">
                         <i class="fas fa-random"></i>
                     </div>
+
+
                 </div>
 
                 <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
@@ -69,32 +74,32 @@
             </div>
         }
         <!-- Playlist -->
-    <div class="playlist">
-        @{
-            MUSIC.Models.DBcontent db = new MUSIC.Models.DBcontent();
-            int stt = 1;
-        }
-        @foreach (var item in db.BAIHATs.ToList())
-        {
-            <a class="song " data-id="@item.idbaihat" href="/music/Baihat/@item.idbaihat">
-                <span>@stt</span>
-                <div class="thumb"
-                     style="background-image: url('@item.hinhbaihat')">
-                </div>
-                <div class="body">
-                    <h3 class="title">@item.tenbaihat</h3>
-                    <p class="author">@item.casi</p>
-                </div>
-                <div class="option">
-                    <i class="fas fa-ellipsis-h"></i>
-                </div>
+        <div class="playlist">
+            @{
+                MUSIC.Models.DBcontent db = new MUSIC.Models.DBcontent();
+                int stt = 1;
+            }
+            @foreach (var item in db.BAIHATs.ToList())
+            {
+                <a class="song " data-id="@item.idbaihat" href="/music/Baihat/@item.idbaihat">
+                    <span>@stt</span>
+                    <div class="thumb"
+                         style="background-image: url('@item.hinhbaihat')">
+                    </div>
+                    <div class="body">
+                        <h3 class="title">@item.tenbaihat</h3>
+                        <p class="author">@item.casi</p>
+                    </div>
+                    <div class="option">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
 
-            </a>
+                </a>
 
-            stt++;
+                stt++;
 
-        }
-    </div>
+            }
+        </div>
     </div>
 </div>
 
@@ -104,7 +109,7 @@
         border: none;
         background: #fff;
     }
-    
+
     :root {
                     --primary-color: #ec1f55;
         --text-color: #333;
@@ -187,12 +192,15 @@
                     justify-content: space-around;
                 padding: 18px 0 8px 0;
                 }
+        .control div{
+            cursor:pointer;
+        }
 
         .control .btn {
-                color: #666;
+            color: #666;
             padding: 18px;
-                    font-size: 18px;
-                }
+            font-size: 18px;
+        }
 
             .control .btn.active {
                 color: var(--primary-color);
@@ -296,27 +304,25 @@
 </style>
 <script type="text/javascript" src="http://www.google.com/jsapi?key=INSERT-YOUR-KEY"></script>
 @*<script type="text/javascript">
-    $(document).ready(function ($) {
-        $('.song').on('click', function (e) {
-            var id = $(this).data('id');
-            $.ajax({
-                url: '/Music/Baihat/id}',
-                type: 'GETS',
-                data: { id: id },
-                success: function (rs) {
-                    rs.success;
-                }
-            });
-        })
-    });
-</script>*@
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
-
+        $(document).ready(function ($) {
+            $('.song').on('click', function (e) {
+                var id = $(this).data('id');
+                $.ajax({
+                    url: '/Music/Baihat/id}',
+                    type: 'GETS',
+                    data: { id: id },
+                    success: function (rs) {
+                        rs.success;
+                    }
+                });
+            })
+        });
+    </script>*@
+@*<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-
     const PlAYER_STORAGE_KEY = "F8_PLAYER";
-
+    const pl = document.querySelector(".btn-song-next-prev");
     const player = document.querySelector(".player");
     const cd = document.querySelector(".cd");
     const heading = document.querySelector("header h2");
@@ -326,10 +332,87 @@
     const progress = document.querySelector("#progress");
     const prevBtn = document.querySelector(".btn-prev");
     const nextBtn = document.querySelector(".btn-next");
-    const randomBtn = document.querySelector(".btn-random");
-    const repeatBtn = document.querySelector(".btn-repeat");
+    const randomBtn = document.querySelector(".btn-randomm");
+    const repeatBtn = document.querySelector(".btn-repeatt");
     const playlist = document.querySelector(".playlist");
     const song = document.querySelector(".song");
+    isRandom: false;
+        isRepeat: false;
+    function prevnext(id) {
+        @{
+            MUSIC.Models.DBcontent db1 = new MUSIC.Models.DBcontent();
+            var song = db.BAIHATs.ToList();
+        }
+        const hasrandomActive = document.querySelector(".btn-randomm").classList.contains("active");
+        const hasrepeatActive = document.querySelector(".btn-repeatt").classList.contains("active");
+
+        if (hasrepeatActive) {
+            window.location.replace("/Music/Baihat/" + id);
+
+        }
+        else {
+            if (hasrandomActive) {
+                let newIndex;
+                if ( newIndex = 0) {
+                    newIndex = Math.floor(Math.random() * @song.Count);
+                }
+                else {
+                    newIndex = Math.floor(Math.random() * @song.Count);
+                }
+                window.location.replace("/Music/Baihat/" + newIndex);
+            }
+            else {
+                id -= 1;
+                if (id <1) {
+                    id = 12;
+                }
+                window.location.replace("/Music/Baihat/" + id);
+            }
+        }
+
+    }
+    function songnext(id) {
+
+        const hasrandomActive = document.querySelector(".btn-randomm").classList.contains("active");
+        const hasrepeatActive = document.querySelector(".btn-repeatt").classList.contains("active");
+
+        if (hasrepeatActive) {
+            window.location.replace("/Music/Baihat/" + id);
+
+        }
+        else {
+            if (hasrandomActive) {
+            let newIndex;
+            if ( newIndex = 0) {
+                newIndex = Math.floor(Math.random() * @song.Count);
+            }
+            else {
+                newIndex = Math.floor(Math.random() * @song.Count);
+            }
+            window.location.replace("/Music/Baihat/" + newIndex);
+
+        }
+        else {
+            id += 1;
+            if (id >@song.Count) {
+                id = 1;
+            }
+            window.location.replace("/Music/Baihat/" + id);
+        }
+        }
+
+
+    }
+
+    repeatBtn.onclick = function (e) {
+        isRepeat: false;
+        this.isRepeat = !this.isRepeat
+        repeatBtn.classList.toggle('active', this.isRepeat);
+    }
+    randomBtn.onclick = function (e) {
+        this.isRandom = !this.isRandom
+        randomBtn.classList.toggle('active', this.isRandom);
+    }
 
 
     const app = {
@@ -338,7 +421,6 @@
         isRandom: false,
         isRepeat: false,
         config: {},
-
 
         setConfig: function (key, value) {
             this.config[key] = value;
@@ -449,8 +531,7 @@
             // Xử lý bật / tắt random song
             // Handling on / off random song
             randomBtn.onclick = function (e) {
-                _this.isRandom = !_this.isRandom;
-                _this.setConfig("isRandom", _this.isRandom);
+                _this.isRandom = !_this.isRandom
                 randomBtn.classList.toggle("active", _this.isRandom);
             };
 
@@ -503,17 +584,12 @@
             }, 300);
         },
         loadCurrentSong: function () {
-            @{
-                var song = db.BAIHATs.Where(n=>n.idbaihat==stt);
-                MUSIC.Models.BAIHAT bAIHAT = new MUSIC.Models.BAIHAT();
-
-            }--><!----><!---->-->
-            <!---->--><!--@*if (@bAIHAT.idbaihat== this.currentIndex) {
+            @*if (@bAIHAT.idbaihat== this.currentIndex) {
                 heading.textContent =@bAIHAT.tenbaihat;
                 cdThumb.style.backgroundImage = `url('${@bAIHAT.hinhbaihat}')`;
                 audio.src = @bAIHAT.linkbaihat;
             }*@-->-->
-            <!--heading.textContent = this.currentSong.name;
+            heading.textContent = this.currentSong.name;
             cdThumb.style.backgroundImage = `url('${this.currentSong.image}')`;
             audio.src = this.currentSong.path;
 
@@ -549,27 +625,12 @@
             this.loadCurrentSong();
         },
         start: function () {
-            // Gán cấu hình từ config vào ứng dụng
-            // Assign configuration from config to application
+
             this.loadConfig();
-
-            // Định nghĩa các thuộc tính cho object
-            // Defines properties for the object
             this.defineProperties();
-
-            // Lắng nghe / xử lý các sự kiện (DOM events)
-            // Listening / handling events (DOM events)
             this.handleEvents();
-
-            // Tải thông tin bài hát đầu tiên vào UI khi chạy ứng dụng
-            // Load the first song information into the UI when running the app
             this.loadCurrentSong();
-
-            // Render playlist
             this.render();
-
-            // Hiển thị trạng thái ban đầu của button repeat & random
-            // Display the initial state of the repeat & random button
             randomBtn.classList.toggle("active", this.isRandom);
             repeatBtn.classList.toggle("active", this.isRepeat);
         }

@@ -5,116 +5,123 @@
 }
 
 <h2 class="center-block text-center topview">Bảng xếp hạng Lượt Thích</h2>
-<div class="player">
-    <div class="playlist">
-        @{
-            int i = 1;
-            var session = (MUSIC.Models.THANHVIEN)Session["TaiKhoan"];
+<div class="backgraoundnen">
+    <div class="player">
+        <div class="playlist">
+            @{
+                int i = 1;
+                var session = (MUSIC.Models.THANHVIEN)Session["TaiKhoan"];
 
-        }
-        @foreach (var item in Model)
-        {
-            if (session != null)
+            }
+            @foreach (var item in Model)
             {
-                <div href="/Home/DetailsMusic/@item.idbaihat" class="song">
-                    @if (i == 1)
-                    {
-                        <div class="mg_0_5px stt" style="font-size:30px; font-weight:700;color:yellow">
-                            @i
-                        </div>
-                    }
-                    else
-                    {
-                        if (i == 2)
+                if (session != null)
+                {
+                    <div href="/Home/DetailsMusic/@item.idbaihat" class="song">
+                        @if (i == 1)
                         {
-                            <div class="mg_0_5px stt" style="font-size:25px; font-weight:650;color:gray">
+                            <div class="mg_0_5px stt" style="font-size:30px; font-weight:700;color:yellow">
                                 @i
                             </div>
                         }
                         else
                         {
-                            if (i == 3)
+                            if (i == 2)
                             {
-                                <div class="mg_0_5px stt" style="font-size:20px; font-weight:600;color:brown">
+                                <div class="mg_0_5px stt" style="font-size:25px; font-weight:650;color:gray">
                                     @i
                                 </div>
                             }
                             else
                             {
-                                <div class="mg_0_5px stt">
-                                    @i
-                                </div>
+                                if (i == 3)
+                                {
+                                    <div class="mg_0_5px stt" style="font-size:20px; font-weight:600;color:brown">
+                                        @i
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="mg_0_5px stt">
+                                        @i
+                                    </div>
+                                }
                             }
                         }
-                    }
-                    <div class="thumb"
-                         style="background-image: url('@item.hinhbaihat')">
-                    </div>
-                    <div class="body">
-                        <h3 class="title">@item.casi</h3>
-                        <p class="author">@item.tenbaihat</p>
-                    </div>
-                    <div class="option">
-                        <a href="/Nguoidung/Like?idbaihat=@item.idbaihat"><i class="fas fa-ellipsis-h"></i></a>
-                    </div>
-                </div>
-            }
-            else
-            {
-                <div href="/Home/DetailsMusic/@item.idbaihat" class="song">
-                    @if (i == 1)
-                    {
-                        <div class="mg_0_5px stt" style="font-size:30px; font-weight:700;color:yellow">
-                            @i
+                        <div class="thumb"
+                             style="background-image: url('@item.hinhbaihat')">
                         </div>
-                    }
-                    else
-                    {
-                        if (i == 2)
+                        <div class="body">
+                            <h3 class="title">@item.casi</h3>
+                            <p class="author">@item.tenbaihat</p>
+                        </div>
+                        <div class="option">
+                            <a href="/Nguoidung/Like?idbaihat=@item.idbaihat"><i class="fas fa-ellipsis-h"></i></a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div href="/Home/DetailsMusic/@item.idbaihat" class="song">
+                        @if (i == 1)
                         {
-                            <div class="mg_0_5px stt" style="font-size:25px; font-weight:650;color:gray">
+                            <div class="mg_0_5px stt" style="font-size:30px; font-weight:700;color:yellow">
                                 @i
                             </div>
                         }
                         else
                         {
-                            if (i == 3)
+                            if (i == 2)
                             {
-                                <div class="mg_0_5px stt" style="font-size:20px; font-weight:600;color:brown">
+                                <div class="mg_0_5px stt" style="font-size:25px; font-weight:650;color:gray">
                                     @i
                                 </div>
                             }
                             else
                             {
-                                <div class="mg_0_5px stt">
-                                    @i
-                                </div>
+                                if (i == 3)
+                                {
+                                    <div class="mg_0_5px stt" style="font-size:20px; font-weight:600;color:brown">
+                                        @i
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="mg_0_5px stt">
+                                        @i
+                                    </div>
+                                }
                             }
                         }
-                    }
-                    <div class="thumb"
-                         style="background-image: url('@item.hinhbaihat')">
-                    </div>
-                    <div class="body">
-                        <h3 class="title">@item.casi</h3>
-                        <p class="author">@item.tenbaihat</p>
-                    </div>
-                    <div class="option">
+                        <div class="thumb"
+                             style="background-image: url('@item.hinhbaihat')">
+                        </div>
+                        <div class="body">
+                            <h3 class="title">@item.casi</h3>
+                            <p class="author">@item.tenbaihat</p>
+                        </div>
+                        <div class="option">
 
+                        </div>
                     </div>
-                </div>
+                }
+
+
+                i++;
             }
-
-
-            i++;
-        }
+        </div>
     </div>
+
 </div>
 
 <style>
     :root {
         --primary-color: #ec1f55;
         --text-color: #333;
+    }
+    .backgraoundnen {
+        background-image: url(/images/nenbody.jpg);
+        background-repeat: none;
     }
 
     * {

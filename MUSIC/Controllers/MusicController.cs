@@ -58,6 +58,7 @@ namespace MUSIC.Controllers
             }
             return RedirectToAction("Baihat/" + id);
         }
+       
 
     }
 }

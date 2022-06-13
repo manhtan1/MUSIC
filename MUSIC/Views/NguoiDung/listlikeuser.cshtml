@@ -4,12 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Bài hát yêu thích</h2>
-<div class="player">
-    <div class="playlist">
-        @foreach (var item in Model)
-        {
+<div class="backgraoundnen">
+    <div class="player">
+        <div class="playlist">
+            @foreach (var item in Model)
+            {
                 <div href="/Home/DetailsMusic/@item.idbaihat" class="song">
-                    
+
                     <div class="thumb"
                          style="background-image: url('@item.BAIHAT.hinhbaihat')">
                     </div>
@@ -21,8 +22,10 @@
                         <a href="/Nguoidung/Like?idbaihat=@item.idbaihat"><i class="fas fa-ellipsis-h"></i></a>
                     </div>
                 </div>
-        }
+            }
+        </div>
     </div>
+
 </div>
 <style>
     :root {
@@ -43,6 +46,10 @@
     html {
         box-sizing: border-box;
         font-family: "Poppins", sans-serif;
+    }
+    .backgraoundnen {
+        background-image: url(/images/nenbody.jpg);
+        background-repeat: none;
     }
 
     .player {
