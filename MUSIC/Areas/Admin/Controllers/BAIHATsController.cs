@@ -10,6 +10,8 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNetCore.Http;
 using MUSIC.Models;
+using System.Configuration;
+using MUSIC.Common;
 
 namespace MUSIC.Areas.Admin.Controllers
 {
@@ -56,18 +58,32 @@ namespace MUSIC.Areas.Admin.Controllers
                 string fileName = Path.GetFileNameWithoutExtension(bAIHAT.ImgBH.FileName);
                 string extension = Path.GetExtension(bAIHAT.ImgBH.FileName);
                 fileName = fileName + extension;
-                bAIHAT.hinhbaihat = "/images/theloainhac/" + fileName;
+                bAIHAT.hinhbaihat = "/images/nhacsi/" + fileName;
                 bAIHAT.ImgBH.SaveAs(Path.Combine(Server.MapPath("~/images/nhacsi/"), fileName));
             }
 
-            linknhac(postedFile);
+            /*linknhac(postedFile);*/
+            
 
-             PLAYLIST pLAYLIST = db.PLAYLISTs.Find(bAIHAT.idplaylist);
+            PLAYLIST pLAYLIST = db.PLAYLISTs.Find(bAIHAT.idplaylist);
             bAIHAT.casi = pLAYLIST.ten;
             bAIHAT.luotthich = 0;
             bAIHAT.luotxem = 0;
+            bAIHAT.linkbaihat = bAIHAT.hinhbaihat;
             db.BAIHATs.Add(bAIHAT);
             db.SaveChanges();
+            string content = System.IO.File.ReadAllText(Server.MapPath("~/Assetss/Customer/template/newMusic.html"));
+            var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+            foreach (var i in db.THANHVIENs.ToList())
+            {
+                content = content.Replace("{{customerMusic}}", bAIHAT.tenbaihat);
+                content = content.Replace("{{casi}}", bAIHAT.casi);
+
+                new MailHelper().SendMail(i.Email, "Nhạc mới", content);
+                new MailHelper().SendMail(toEmail, "Nhạc mới", content);
+            }
+            
+
             return RedirectToAction("Index");
 
         }

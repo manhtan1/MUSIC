@@ -29,7 +29,7 @@
                         <div class="gird-row">
                             <div class="gird-column-5 block__">
                                 <h3 class="" href="#">
-                                    Danh sách nghe gần đây nhất
+                                   Danh sách yêu thích
                                 </h3>
                                 <div class="playlist">
                                     @{
@@ -44,7 +44,7 @@
 
 
                                     }
-                                    @if (Session == null)
+                                    @if (session == null)
                                     {
                                         <h3>Tạm thời chưa có bài nào nghe gần đây</h3>
                                     }
@@ -77,7 +77,7 @@
                                 </h3>
                                 <div class="playlist">
                                    
-                                    @if (Session == null)
+                                    @if (lstNhac == null)
                                     {
                                         <h3>Tạm thời chưa có bài nào nghe gần đây</h3>
                                     }

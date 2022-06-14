@@ -1917,6 +1917,7 @@
     <Content Include="Assetss\Customer\js\navigation.js" />
     <Content Include="Assetss\Customer\js\respond.min.js" />
     <Content Include="Assetss\Customer\js\totop.js" />
+    <Content Include="Assetss\Customer\template\newMusic.html" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\font-awesome.css" />
