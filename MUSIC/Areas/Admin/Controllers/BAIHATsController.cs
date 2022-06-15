@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Http;
 using MUSIC.Models;
 using System.Configuration;
 using MUSIC.Common;
+using PagedList;
+using PagedList.Mvc;
 
 namespace MUSIC.Areas.Admin.Controllers
 {
@@ -23,6 +25,8 @@ namespace MUSIC.Areas.Admin.Controllers
         // GET: Admin/BAIHATs
         public ActionResult Index()
         {
+            /*int PageSize = 10;
+            int PageNum = (page ?? 1);*/
             var bAIHATs = db.BAIHATs.Include(b => b.ALBUM).Include(b => b.PLAYLIST).Include(b => b.THELOAI);
             return View(bAIHATs.ToList());
         }

@@ -25,7 +25,9 @@ namespace MUSIC.Common
             bool enabledSsl = bool.Parse(ConfigurationManager.AppSettings["EnabledSSL"].ToString());
 
             string body = content;
+            //MailMessage message = new MailMessage(new MailAddress(fromEmailAddress, fromEmailDisplayName), new MailAddress(toEmailAddress));
             MailMessage message = new MailMessage(new MailAddress(fromEmailAddress, fromEmailDisplayName), new MailAddress(toEmailAddress));
+
             message.Subject = subject;
             message.IsBodyHtml = true;
             message.Body = body;

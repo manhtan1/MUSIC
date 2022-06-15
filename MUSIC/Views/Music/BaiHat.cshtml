@@ -356,6 +356,9 @@
         const hasrepeatActive = document.querySelector(".btn-repeatt").classList.contains("active");
 
         if (hasrepeatActive) {
+            if (id < 1) {
+                id = 12;
+            }
             window.location.replace("/Music/Baihat/" + id);
 
         }
@@ -386,6 +389,9 @@
         const hasrepeatActive = document.querySelector(".btn-repeatt").classList.contains("active");
 
         if (hasrepeatActive) {
+            if (id >@song.Count) {
+                id = 1;
+            }
             window.location.replace("/Music/Baihat/" + id);
 
         }

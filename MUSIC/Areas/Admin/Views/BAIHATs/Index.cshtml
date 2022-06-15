@@ -1,5 +1,6 @@
-﻿@model IEnumerable<MUSIC.Models.BAIHAT>
-
+﻿@*@using PagedList.Mvc;*@
+@*@model PagedList.PagedList<MUSIC.Models.BAIHAT>*@
+@model IEnumerable<MUSIC.Models.BAIHAT>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -27,42 +28,44 @@
         <th>
             Hình ảnh
         </th>
-        
+
         <th>
-            @Html.DisplayNameFor(model => model.linkbaihat)
+            Audio
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ALBUM.tenalbum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PLAYLIST.ten)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.THELOAI.tentheloai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tenbaihat)
-        </td>
-        <td>
-            <img src=" @Html.DisplayFor(modelItem => item.hinhbaihat)" width="50%" alt="Alternate Text" />
-           
-        </td>
-        
-        <td>
-            <audio controls="controls">
-                <source src="@Html.DisplayFor(modelItem => item.linkbaihat)" type="audio/mp3" />
-            </audio>
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idbaihat }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idbaihat })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ALBUM.tenalbum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PLAYLIST.ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.THELOAI.tentheloai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tenbaihat)
+            </td>
+            <td>
+                <img src=" @Html.DisplayFor(modelItem => item.hinhbaihat)" width="300px" alt="Alternate Text" />
+
+            </td>
+
+            <td>
+                <audio controls="controls">
+                    <source src="@Html.DisplayFor(modelItem => item.linkbaihat)" type="audio/mp3" />
+                </audio>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idbaihat }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idbaihat })
+            </td>
+        </tr>
+    }
 
 </table>
+@*@(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.Count;*@

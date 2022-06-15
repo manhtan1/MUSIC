@@ -1,10 +1,13 @@
-﻿using MUSIC.Models;
+﻿using MUSIC.Common;
+using MUSIC.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace MUSIC.Controllers
 {
@@ -75,10 +78,18 @@ namespace MUSIC.Controllers
                 kh.NgayDangKy= DateTime.Now; 
                 db.THANHVIENs.Add(kh);
                     db.SaveChanges();
-                    ViewBag.ThongBao = "Đăng ký thành công";
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/Assetss/Customer/template/Gmail.html"));
+                var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+                
+                    content = content.Replace("{{tk}}", kh.TenDN);
+                    content = content.Replace("{{hoten}}", kh.HoTen);
+                    content = content.Replace("{{email}}", kh.Email);
+
+
+                new MailHelper().SendMail(kh.Email, "Đăng ký Tài khoản thành công!", content);
+                    new MailHelper().SendMail(toEmail, "Đăng ký Tài khoản thành công!", content);
+
                     return RedirectToAction("DangNhap");
-
-
                 }
             return this.DangKy();
         }
@@ -128,6 +139,34 @@ namespace MUSIC.Controllers
             {
                 return RedirectToAction("DangNhap", "NguoiDung");
             }
+        }
+        public ActionResult Quenmk()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Quenmk(FormCollection collection)
+        {
+            var Email = collection["QuenMail"];
+            string password = Membership.GeneratePassword(12, 1);
+            THANHVIEN tHANHVIEN = db.THANHVIENs.SingleOrDefault(n => n.Email == Email);
+            tHANHVIEN.MatKhau = password;
+            db.SaveChanges();
+            string content = System.IO.File.ReadAllText(Server.MapPath("~/Assetss/Customer/template/Quenmk.html"));
+            var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+            content = content.Replace("{{tk}}", tHANHVIEN.TenDN);
+
+            content = content.Replace("{{pass}}", password);
+
+
+            new MailHelper().SendMail(Email, "Đăng ký Tài khoản thành công!", content);
+            new MailHelper().SendMail(toEmail, "Đăng ký Tài khoản thành công!", content);
+            return RedirectToAction("/Dangnhap");
+        }
+        public ActionResult sussess()
+        {
+             return View();
         }
 
         public ActionResult Cmt(int idbaihat, FormCollection collection)
@@ -189,7 +228,29 @@ namespace MUSIC.Controllers
 
             return View(kh);
         }
-
+        public ActionResult Doimk()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Doimk(FormCollection collection)
+        {
+            THANHVIEN kh = (THANHVIEN)Session["TaiKhoan"];
+            var mkcu = collection["mkcu"];
+            var mkmoi = collection["Mknew"];
+            if (kh.MatKhau==mkcu)
+            {
+                mkmoi=kh.MatKhau ;
+                db.SaveChanges();
+                Session["TaiKhoan"] = null;
+                return RedirectToAction("Dangky", "Nguoidung");
+            }
+            else
+            {
+                ViewBag.ThongBao = "Mật khẩu không chính xác"; 
+            }
+            return View();
+        }
 
     }
 }

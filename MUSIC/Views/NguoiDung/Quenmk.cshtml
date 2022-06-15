@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Quenmk";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Quenmk</h2>
+@using (Html.BeginForm())
+{
+<form action="/" method="post">
+    <div class="input-icon">
+        @Html.TextBox("QuenMail", "", new { placeholder = "Nhập email " })
+    </div>
+    <div class="footer-action">
+        <input type="submit" value="Gửi" class="auth-submit">
+    </div>
+</form>
+}
