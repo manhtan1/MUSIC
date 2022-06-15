@@ -86,7 +86,7 @@ namespace MUSIC.Areas.Admin.Controllers
                 new MailHelper().SendMail(i.Email, "Nhạc mới", content);
                 new MailHelper().SendMail(toEmail, "Nhạc mới", content);
             }
-            
+
 
             return RedirectToAction("Index");
 
