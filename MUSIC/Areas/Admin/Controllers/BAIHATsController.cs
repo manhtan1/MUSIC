@@ -8,19 +8,19 @@ using Microsoft.AspNetCore.Hosting;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNetCore.Http;
 using MUSIC.Models;
 using System.Configuration;
 using MUSIC.Common;
 using PagedList;
 using PagedList.Mvc;
+using System.Data.SqlClient;
 
 namespace MUSIC.Areas.Admin.Controllers
 {
     public class BAIHATsController : Controller
     {
         private DBcontent db = new DBcontent();
-        private IHostingEnvironment Environment;
+
 
         // GET: Admin/BAIHATs
         public ActionResult Index(int ? page)
@@ -46,6 +46,8 @@ namespace MUSIC.Areas.Admin.Controllers
         }
 
         // GET: Admin/BAIHATs/Create
+        
+
         public ActionResult Create()
         {
             ViewBag.idalbum = new SelectList(db.ALBUMs, "idalbum", "tenalbum");
@@ -57,26 +59,54 @@ namespace MUSIC.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(BAIHAT bAIHAT, HttpPostedFileBase postedFile)
         {
-            if (bAIHAT.ImgBH != null)
+ */
+            if (postedFile!=null)
             {
-                string fileName = Path.GetFileNameWithoutExtension(bAIHAT.ImgBH.FileName);
-                string extension = Path.GetExtension(bAIHAT.ImgBH.FileName);
-                fileName = fileName + extension;
-                bAIHAT.hinhbaihat = "/images/nhacsi/" + fileName;
-                bAIHAT.ImgBH.SaveAs(Path.Combine(Server.MapPath("~/images/nhacsi/"), fileName));
-            }
+                string fileName = Path.GetFileName(postedFile.FileName);
+                if (postedFile.ContentLength < 104857600)
+                {
+                    if (bAIHAT.ImgBH != null)
+                    {
+                        string filename = Path.GetFileNameWithoutExtension(bAIHAT.ImgBH.FileName);
+                        string extension = Path.GetExtension(bAIHAT.ImgBH.FileName);
+                        fileName = fileName + extension;
+                        bAIHAT.hinhbaihat = "/images/nhacsi/" + filename;
+                        bAIHAT.ImgBH.SaveAs(Path.Combine(Server.MapPath("~/images/nhacsi/"), fileName));
+                    }
 
-            /*linknhac(postedFile);*/
+
+                    PLAYLIST pLAYLIST = db.PLAYLISTs.Find(bAIHAT.idplaylist);
+                    bAIHAT.casi = pLAYLIST.ten;
+
+
+
+                    postedFile.SaveAs(Server.MapPath("/music/"+ fileName));
+                    string mainconn = ConfigurationManager.ConnectionStrings["DBcontent"].ConnectionString;
+                    SqlConnection sqlconn = new SqlConnection(mainconn);
+                    string sqlquery = "insert into [dbo].[BAIHAT] values (@idtheloai,@idalbum,@idplaylist,@tenbaihat,@hinhbaihat,@casi,@linkbaihat,@lyrics,@luotxem,@luotthich)";
+                    SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
+                    sqlconn.Open();
+                    /*sqlcomm.Parameters.AddWithValue("@idbaihat", bAIHAT.idbaihat);*/
+                    sqlcomm.Parameters.AddWithValue("@idtheloai", bAIHAT.idtheloai);
+                    sqlcomm.Parameters.AddWithValue("@idalbum", bAIHAT.idalbum);
+                    sqlcomm.Parameters.AddWithValue("@idplaylist", bAIHAT.idplaylist);
+                    sqlcomm.Parameters.AddWithValue("@tenbaihat", bAIHAT.tenbaihat);
+                    sqlcomm.Parameters.AddWithValue("@hinhbaihat", bAIHAT.hinhbaihat);
+                    sqlcomm.Parameters.AddWithValue("@casi", bAIHAT.casi);
+                    sqlcomm.Parameters.AddWithValue("@linkbaihat", "/music/" + fileName);
+                    sqlcomm.Parameters.AddWithValue("@lyrics", bAIHAT.lyrics);
+                    sqlcomm.Parameters.AddWithValue("@luotxem", 0);
+                    sqlcomm.Parameters.AddWithValue("@luotthich",  0);
+
+                    sqlcomm.ExecuteNonQuery();
+                    sqlconn.Close();
+                    ViewData["Message"] = "Record Saved Successfully!";
+                }
+            }
             
 
-            PLAYLIST pLAYLIST = db.PLAYLISTs.Find(bAIHAT.idplaylist);
-            bAIHAT.casi = pLAYLIST.ten;
-            bAIHAT.luotthich = 0;
-            bAIHAT.luotxem = 0;
-            bAIHAT.linkbaihat = bAIHAT.hinhbaihat;
-            db.BAIHATs.Add(bAIHAT);
-            db.SaveChanges();
-            string content = System.IO.File.ReadAllText(Server.MapPath("~/Assetss/Customer/template/newMusic.html"));
+           
+            /*string content = System.IO.File.ReadAllText(Server.MapPath("~/Assetss/Customer/template/newMusic.html"));
             var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
             foreach (var i in db.THANHVIENs.ToList())
             {
@@ -85,8 +115,7 @@ namespace MUSIC.Areas.Admin.Controllers
 
                 new MailHelper().SendMail(i.Email, "Nhạc mới", content);
                 new MailHelper().SendMail(toEmail, "Nhạc mới", content);
-            }
-
+            }*/
 
             return RedirectToAction("Index");
 
@@ -168,5 +197,54 @@ namespace MUSIC.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+
+
+
+        /*public static void uploadFile(DriveService _service, string _uploadFile)
+        {
+            if (System.IO.File.Exists(_uploadFile))
+            {
+                var body = new Google.Apis.Drive.v3.Data.File();
+                //File body = new File();
+                body.Name = System.IO.Path.GetFileName(_uploadFile);
+                //body.Description = _descrp;
+                body.MimeType = GetMimeType(_uploadFile);
+                // body.Parents = new List<ParentReference>() { new ParentReference() { Id = _parent } };
+
+                FilesResource.CreateMediaUpload request;
+                try
+                {
+                    using (var stream = new System.IO.FileStream(_uploadFile, System.IO.FileMode.Open))
+                    {
+                        request = _service.Files.Create(body, stream, body.MimeType);
+                        request.Fields = "id";
+                        request.Upload();
+                    }
+                    var file = request.ResponseBody;
+                    var fili = file.Id;
+                }
+                catch (Exception e)
+                {
+
+                }
+            }
+            else
+            {
+
+            }
+        }
+
+        private static string GetMimeType(string fileName)
+        {
+            string mimeType = "application/unknown";
+            string ext = System.IO.Path.GetExtension(fileName).ToLower();
+            Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
+            if (regKey != null && regKey.GetValue("Content Type") != null)
+                mimeType = regKey.GetValue("Content Type").ToString();
+            return mimeType;
+        }*/
     }
 }
