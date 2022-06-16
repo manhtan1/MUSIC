@@ -2260,6 +2260,7 @@
     <Content Include="Views\NguoiDung\Quenmk.cshtml" />
     <Content Include="Views\NguoiDung\sussess.cshtml" />
     <Content Include="Views\NguoiDung\Doimk.cshtml" />
+    <Content Include="Views\NguoiDung\EditUser.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

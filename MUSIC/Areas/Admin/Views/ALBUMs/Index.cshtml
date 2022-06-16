@@ -1,5 +1,7 @@
-﻿@model IEnumerable<MUSIC.Models.ALBUM>
-
+﻿
+@using PagedList.Mvc;
+@using MUSIC.Models;
+@model PagedList.IPagedList<MUSIC.Models.ALBUM>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -22,37 +24,52 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.tenalbum)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.tencasialbum)
-    <td>
-        @{
-            MUSIC.Models.DBcontent db = new MUSIC.Models.DBcontent();
-            var nhac = db.BAIHATs.ToList();
-        }
-        <ul>
-            @foreach (var i in nhac)
-            {
-
-                if (item.idalbum == i.idalbum)
-                {
-                    <li>
-                        @i.tenbaihat
-                    </li>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tenalbum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tencasialbum)
+            <td>
+                @{
+                    MUSIC.Models.DBcontent db = new MUSIC.Models.DBcontent();
+                    var nhac = db.BAIHATs.ToList();
                 }
-            }
-        </ul>
+                <ul>
+                    @foreach (var i in nhac)
+                    {
 
-    </td>
-    <td>
-    @Html.ActionLink("Edit", "Edit", new { id = item.idalbum }) |
-    @Html.ActionLink("Delete", "Delete", new { id = item.idalbum })
-    </td>
-</tr>
-}
+                        if (item.idalbum == i.idalbum)
+                        {
+                            <li>
+                                @i.tenbaihat
+                            </li>
+                        }
+                    }
+                </ul>
+
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idalbum }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idalbum })
+            </td>
+        </tr>
+    }
 
 </table>
+<div class="Menu">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page = Page }))
+</div>
+<style>
+    .Menu li {
+        display: inline;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .pagination {
+        justify-content: center;
+    }
+</style>

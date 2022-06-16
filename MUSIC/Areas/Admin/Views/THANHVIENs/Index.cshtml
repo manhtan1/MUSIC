@@ -1,4 +1,6 @@
-﻿@model IEnumerable<MUSIC.Models.THANHVIEN>
+﻿@using PagedList.Mvc;
+@using MUSIC.Models;
+@model PagedList.IPagedList<MUSIC.Models.THANHVIEN>
 
 @{
     ViewBag.Title = "Index";
@@ -8,49 +10,64 @@
 <h2>Thành viên</h2>
 
 <p>
-     @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                Họ Tên
-            </th>
-
-            <th>
-                Số điện thoại
-            </th>
-
-            <th>
-                Email
-            </th>
-            <th>
-                Ngày đăng ký
-            </th>
-            <th></th>
-        </tr>
-
-    @foreach (var item in Model) {
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.HoTen)
-        </td>
+        <th>
+            Họ Tên
+        </th>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.DienThoai)
-        </td>
+        <th>
+            Số điện thoại
+        </th>
 
-
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayDangKy)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.TenDN }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.TenDN })
-        </td>
+        <th>
+            Email
+        </th>
+        <th>
+            Ngày đăng ký
+        </th>
+        <th></th>
     </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoTen)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DienThoai)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayDangKy)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TenDN }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TenDN })
+            </td>
+        </tr>
     }
 
-    </table>
+</table>
+<div class="Menu">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page = Page }))
+</div>
+<style>
+    .Menu li {
+        display: inline;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .pagination {
+        justify-content: center;
+    }
+</style>

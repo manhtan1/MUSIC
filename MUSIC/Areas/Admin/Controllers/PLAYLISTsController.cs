@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MUSIC.Models;
+using PagedList;
 
 namespace MUSIC.Areas.Admin.Controllers
 {
@@ -16,10 +17,12 @@ namespace MUSIC.Areas.Admin.Controllers
         private DBcontent db = new DBcontent();
 
         // GET: Admin/PLAYLISTs
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            
-            return View(db.PLAYLISTs.ToList());
+            int PageSize = 10;
+            int PageNum = (page ?? 1);
+            var pLAYLISTs = db.PLAYLISTs.ToList();
+            return View(pLAYLISTs.ToPagedList(PageNum, PageSize));
         }
 
         // GET: Admin/PLAYLISTs/Details/5

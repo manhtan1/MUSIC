@@ -1,4 +1,6 @@
-﻿@model IEnumerable<MUSIC.Models.THELOAI>
+﻿@using PagedList.Mvc;
+@using MUSIC.Models;
+@model PagedList.IPagedList<MUSIC.Models.THELOAI>
 
 @{
     ViewBag.Title = "Index";
@@ -13,34 +15,63 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CHUDE.tenchude)
+            Tên chủ đề
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tentheloai)
+            Tên thể loại
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.hinhtheloai)
+            hình thể loại
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CHUDE.tenchude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tentheloai)
-        </td>
-        <td>
-            <img src="@Html.DisplayFor(modelItem => item.hinhtheloai)" width="200px" alt="Alternate Text" />
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idtheloai }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idtheloai }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idtheloai })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CHUDE.tenchude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tentheloai)
+            </td>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.hinhtheloai)" width="200px" alt="Alternate Text" />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idtheloai }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idtheloai }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idtheloai })
+            </td>
+        </tr>
+    }
 
 </table>
+<div class="Menu">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page = Page }))
+</div>
+<style>
+    .Menu li {
+        display: inline;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .pagination {
+        justify-content: center;
+    }
+</style>
+<div class="Menu">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page = Page }))
+</div>
+<style>
+    .Menu li {
+        display: inline;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .pagination {
+        justify-content: center;
+    }
+</style>

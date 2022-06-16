@@ -1,6 +1,9 @@
-﻿@*@using PagedList.Mvc;*@
-@*@model PagedList.PagedList<MUSIC.Models.BAIHAT>*@
-@model IEnumerable<MUSIC.Models.BAIHAT>
+﻿@using PagedList.Mvc;
+@using MUSIC.Models;
+@model PagedList.IPagedList<MUSIC.Models.BAIHAT>
+
+
+@*@model IEnumerable<MUSIC.Models.BAIHAT>*@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -68,4 +71,18 @@
     }
 
 </table>
-@*@(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.Count;*@
+
+@*@(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.Count*@
+<div class="Menu">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new {Page=Page}))
+</div>
+<style>
+    .Menu li{
+        display:inline;
+        padding:0 10px;
+        text-align:center;
+    }
+    .pagination{
+        justify-content:center;
+    }
+</style>

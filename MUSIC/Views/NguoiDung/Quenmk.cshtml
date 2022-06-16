@@ -4,15 +4,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Quenmk</h2>
-@using (Html.BeginForm())
-{
-<form action="/" method="post">
-    <div class="input-icon">
-        @Html.TextBox("QuenMail", "", new { placeholder = "Nhập email " })
-    </div>
-    <div class="footer-action">
-        <input type="submit" value="Gửi" class="auth-submit">
-    </div>
-</form>
-}
+<div class="QMK">
+    @using (Html.BeginForm())
+    {
+        <form action="/" method="post">
+            <div class="input-icon">
+                @Html.TextBox("QuenMail", "", new { placeholder = "Nhập email " })
+            </div>
+                <input type="submit" value="Gửi" class="clickmk">
+        </form>
+    }
+</div>
+<style>
+    .QMK {
+        text-align: center;
+        background-image: url(https://i.pinimg.com/564x/18/a9/db/18a9dbe9e5a9c0eb0b0ef63d2d7bf10e.jpg);
+    }
+    .input-icon input {
+        padding: 5px;
+        margin: 15px 0 0 0;
+    }
+    .clickmk {
+        width: 70px;
+        border: none;
+        border-radius: 5px;
+        background: #00cc00;
+        color: #fff;
+        padding: 5px;
+        margin: 15px 0;
+    }
+</style>

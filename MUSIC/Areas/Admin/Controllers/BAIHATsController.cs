@@ -23,12 +23,12 @@ namespace MUSIC.Areas.Admin.Controllers
         private IHostingEnvironment Environment;
 
         // GET: Admin/BAIHATs
-        public ActionResult Index()
+        public ActionResult Index(int ? page)
         {
-            /*int PageSize = 10;
-            int PageNum = (page ?? 1);*/
-            var bAIHATs = db.BAIHATs.Include(b => b.ALBUM).Include(b => b.PLAYLIST).Include(b => b.THELOAI);
-            return View(bAIHATs.ToList());
+            int PageSize = 10;
+            int PageNum = (page ?? 1);
+            var bAIHATs = db.BAIHATs.ToList();
+            return View(bAIHATs.ToPagedList(PageNum, PageSize));
         }
 
         public ActionResult Details(int? id)

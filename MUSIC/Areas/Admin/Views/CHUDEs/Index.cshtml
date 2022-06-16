@@ -1,5 +1,6 @@
-﻿@model IEnumerable<MUSIC.Models.CHUDE>
-
+﻿@using PagedList.Mvc;
+@using MUSIC.Models;
+@model PagedList.IPagedList<MUSIC.Models.CHUDE>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -24,45 +25,59 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.tenchude)
-    </td>
-    @{
-        var img = "~/images/nen.jpg";
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tenchude)
+            </td>
+            @{
+                var img = "~/images/nen.jpg";
 
 
-    }
-    @if (item.hinhchude == "Alternate Text")
-    {
-        <td>
-            <img src="img" width="200px" alt="nen" />
-        </td>
+            }
+            @if (item.hinhchude == "Alternate Text")
+            {
+                <td>
+                    <img src="img" width="200px" alt="nen" />
+                </td>
 
-    }
-    else
-    {
-        <td>
-            <img src="@Html.DisplayFor(modelItem => item.hinhchude)" width="200px" alt="Alternate Text" />
+            }
+            else
+            {
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.hinhchude)" width="200px" alt="Alternate Text" />
 
-        </td>
-    }
+                </td>
+            }
 
 
-    <td>
-        <a class="btn-edit" href="@Url.Action("Edit", "CHUDEs", new { id = item.idchude })">
-            <ion-icon name="create-outline"></ion-icon>
-        </a>
-        |
-        <a class="btn-delete" href="@Url.Action("Delete","CHUDEs", new { id = item.idchude })">
-            <ion-icon name="trash-outline"></ion-icon>
-        </a>
+            <td>
+                <a class="btn-edit" href="@Url.Action("Edit", "CHUDEs", new { id = item.idchude })">
+                    <ion-icon name="create-outline"></ion-icon>
+                </a>
+                |
+                <a class="btn-delete" href="@Url.Action("Delete","CHUDEs", new { id = item.idchude })">
+                    <ion-icon name="trash-outline"></ion-icon>
+                </a>
 
-    </td>
-</tr>
+            </td>
+        </tr>
     }
 
 </table>
+<div class="Menu">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page = Page }))
+</div>
+<style>
+    .Menu li {
+        display: inline;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .pagination {
+        justify-content: center;
+    }
+</style>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <style>
@@ -74,14 +89,16 @@
         padding: 8px;
         border-radius: 5px;
     }
-    .btn-delete{
+
+    .btn-delete {
         background: red;
-    color: #fff;
-    font-size: 20px;
-    padding: 6px 9px;
-    border-radius: 5px;
-    margin-left: 5px;
-}
+        color: #fff;
+        font-size: 20px;
+        padding: 6px 9px;
+        border-radius: 5px;
+        margin-left: 5px;
+    }
+
     tr td {
         line-height: 140px;
     }

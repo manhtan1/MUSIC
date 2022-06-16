@@ -1,4 +1,6 @@
-﻿@model IEnumerable<MUSIC.Models.PLAYLIST>
+﻿@using PagedList.Mvc;
+@using MUSIC.Models;
+@model PagedList.IPagedList<MUSIC.Models.PLAYLIST>
 
 @{
     ViewBag.Title = "Index";
@@ -24,40 +26,55 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ten)
-        </td>
-        <td>
-            <img src="@Html.DisplayFor(modelItem => item.hinhnen)" style="width:300px" alt="Alternate Text" />
-        </td>
-        <td>
-            @{
-                MUSIC.Models.DBcontent db = new MUSIC.Models.DBcontent();
-                var nhac = db.BAIHATs.ToList();
-            }
-            <ul>
-                @foreach (var i in nhac)
-                {
-
-                    if (item.idplaylist == i.idplaylist)
-                    {
-                <li>
-                    @i.tenbaihat
-                </li>
-                    }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ten)
+            </td>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.hinhnen)" style="width:300px" alt="Alternate Text" />
+            </td>
+            <td>
+                @{
+                    MUSIC.Models.DBcontent db = new MUSIC.Models.DBcontent();
+                    var nhac = db.BAIHATs.ToList();
                 }
-            </ul>
-            
-        </td>
-       
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idplaylist }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idplaylist }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idplaylist })
-        </td>
-    </tr>
-}
+                <ul>
+                    @foreach (var i in nhac)
+                    {
+
+                        if (item.idplaylist == i.idplaylist)
+                        {
+                            <li>
+                                @i.tenbaihat
+                            </li>
+                        }
+                    }
+                </ul>
+
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idplaylist }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idplaylist }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idplaylist })
+            </td>
+        </tr>
+    }
 
 </table>
+<div class="Menu">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page = Page }))
+</div>
+<style>
+    .Menu li {
+        display: inline;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .pagination {
+        justify-content: center;
+    }
+</style>

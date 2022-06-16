@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -160,8 +161,8 @@ namespace MUSIC.Controllers
             content = content.Replace("{{pass}}", password);
 
 
-            new MailHelper().SendMail(Email, "Đăng ký Tài khoản thành công!", content);
-            new MailHelper().SendMail(toEmail, "Đăng ký Tài khoản thành công!", content);
+            new MailHelper().SendMail(Email, "Lấy lại mật khẩu thành công!", content);
+            new MailHelper().SendMail(toEmail, "Lấy lại mật khẩu thành công!", content);
             return RedirectToAction("/Dangnhap");
         }
         public ActionResult sussess()
@@ -236,14 +237,16 @@ namespace MUSIC.Controllers
         public ActionResult Doimk(FormCollection collection)
         {
             THANHVIEN kh = (THANHVIEN)Session["TaiKhoan"];
+            var qmk = db.THANHVIENs.SingleOrDefault(n => n.TenDN == kh.TenDN);
+            
             var mkcu = collection["mkcu"];
             var mkmoi = collection["Mknew"];
             if (kh.MatKhau==mkcu)
             {
-                mkmoi=kh.MatKhau ;
+                qmk.MatKhau = mkmoi;
                 db.SaveChanges();
                 Session["TaiKhoan"] = null;
-                return RedirectToAction("Dangky", "Nguoidung");
+                return RedirectToAction("Dangnhap", "Nguoidung");
             }
             else
             {
@@ -251,6 +254,26 @@ namespace MUSIC.Controllers
             }
             return View();
         }
+        public ActionResult EditUser(string id)
+        {
+            THANHVIEN kh = (THANHVIEN)Session["TaiKhoan"];
+            return View(kh);
+            
+        }
+        [HttpPost]
+        public ActionResult EditUser(THANHVIEN tHANHVIEN)
+        {
+            THANHVIEN kh = (THANHVIEN)Session["TaiKhoan"];
 
+            
+            if (ModelState.IsValid)
+            {
+                db.Entry(tHANHVIEN).State = EntityState.Modified;
+                tHANHVIEN.MatKhau = kh.MatKhau;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("ThongtinUser", "Nguoidung");
+        }
     }
 }
