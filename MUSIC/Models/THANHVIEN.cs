@@ -59,5 +59,12 @@ namespace MUSIC.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_luotthich> CT_luotthich { get; set; }
+        public bool DoLogin(string TenDN, string MatKhau)
+        {
+            if (string.IsNullOrEmpty(TenDN) || string.IsNullOrEmpty(MatKhau))
+                return false;
+
+            return true;
+        }
     }
 }

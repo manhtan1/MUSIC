@@ -21,6 +21,7 @@ namespace MUSIC.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
 
@@ -39,19 +40,19 @@ namespace MUSIC.Controllers
                 {
                     ViewData["Loi1"] = "Bạn chưa nhập Họ tên!!";
                 }
-                if (String.IsNullOrEmpty(taikhoan))
+                else if (String.IsNullOrEmpty(taikhoan))
                 {
                     ViewData["Loi2"] = "Bạn chưa nhập Tài khoản!!";
                 }
-                if (String.IsNullOrEmpty(matkhau))
+                else if (String.IsNullOrEmpty(matkhau))
                 {
                     ViewData["Loi3"] = "Bạn chưa cài mật khẩu !!";
                 }
-                if (String.IsNullOrEmpty(email))
+                else if (String.IsNullOrEmpty(email))
                 {
                     ViewData["Loi5"] = "Bạn để trống email bạn đang dùng !!";
                 }
-                if (String.IsNullOrEmpty(nhaplaimatkhau))
+                else if (String.IsNullOrEmpty(nhaplaimatkhau))
                 {
                     if (email != nhaplaimatkhau)
                     {
@@ -59,11 +60,11 @@ namespace MUSIC.Controllers
                     }
                     ViewData["Loi4"] = "Bạn phải nhập lại mật khẩu!!";
                 }
-                if (String.IsNullOrEmpty(dienthoai))
+                else if (String.IsNullOrEmpty(dienthoai))
                 {
                     ViewData["Loi6"] = "Bạn để trống số điện thoại của bạn !!";
                 }
-                if (String.IsNullOrEmpty(diachi))
+                else if (String.IsNullOrEmpty(diachi))
                 {
                     ViewData["Loi7"] = "Bạn để trống địa chỉ bạn đang ở !!";
                 }
@@ -100,10 +101,11 @@ namespace MUSIC.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult DangNhap(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult DangNhap(FormCollection ahihi)
         {
-            var tendn = collection["TenDN"];
-            var mk = collection["MatKhau"];
+            var tendn = ahihi["TenDN"];
+            var mk = ahihi["MatKhau"];
             if (string.IsNullOrEmpty(tendn))
             {
                 ViewData["Loi1"] = "Phải nhập tên đăng nhập";

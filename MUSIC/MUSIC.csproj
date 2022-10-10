@@ -2261,6 +2261,7 @@
     <Content Include="Views\NguoiDung\sussess.cshtml" />
     <Content Include="Views\NguoiDung\Doimk.cshtml" />
     <Content Include="Views\NguoiDung\EditUser.cshtml" />
+    <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

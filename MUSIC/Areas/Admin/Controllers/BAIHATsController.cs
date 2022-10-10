@@ -59,7 +59,6 @@ namespace MUSIC.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(BAIHAT bAIHAT, HttpPostedFileBase postedFile)
         {
- */
             if (postedFile!=null)
             {
                 string fileName = Path.GetFileName(postedFile.FileName);
@@ -69,9 +68,9 @@ namespace MUSIC.Areas.Admin.Controllers
                     {
                         string filename = Path.GetFileNameWithoutExtension(bAIHAT.ImgBH.FileName);
                         string extension = Path.GetExtension(bAIHAT.ImgBH.FileName);
-                        fileName = fileName + extension;
+                        filename = filename + extension;
                         bAIHAT.hinhbaihat = "/images/nhacsi/" + filename;
-                        bAIHAT.ImgBH.SaveAs(Path.Combine(Server.MapPath("~/images/nhacsi/"), fileName));
+                        bAIHAT.ImgBH.SaveAs(Path.Combine(Server.MapPath("~/images/nhacsi/"), filename));
                     }
 
 
@@ -103,10 +102,10 @@ namespace MUSIC.Areas.Admin.Controllers
                     ViewData["Message"] = "Record Saved Successfully!";
                 }
             }
-            
 
-           
-            /*string content = System.IO.File.ReadAllText(Server.MapPath("~/Assetss/Customer/template/newMusic.html"));
+
+
+            string content = System.IO.File.ReadAllText(Server.MapPath("~/Assetss/Customer/template/newMusic.html"));
             var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
             foreach (var i in db.THANHVIENs.ToList())
             {
@@ -115,26 +114,12 @@ namespace MUSIC.Areas.Admin.Controllers
 
                 new MailHelper().SendMail(i.Email, "Nhạc mới", content);
                 new MailHelper().SendMail(toEmail, "Nhạc mới", content);
-            }*/
+            }
 
             return RedirectToAction("Index");
 
         }
-        public string linknhac(HttpPostedFileBase postedFile)
-        {
-            BAIHAT bAIHAT = new BAIHAT();
-            
-                string fileName = Path.GetFileNameWithoutExtension(postedFile.FileName);
-                string extension = Path.GetExtension(postedFile.FileName);
-                fileName = fileName + extension;
-                bAIHAT.linkbaihat =  fileName;
-                postedFile.SaveAs(Path.Combine(Server.MapPath("~/music/"), fileName));
-            return bAIHAT.linkbaihat;
-        }
-
-       
-
-        // GET: Admin/BAIHATs/Edit/5
+     
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -153,18 +138,44 @@ namespace MUSIC.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idbaihat,idtheloai,idalbum,idplaylist,tenbaihat,hinhbaihat,casi,linkbaihat")] BAIHAT bAIHAT)
+        public ActionResult Edit(BAIHAT bAIHAT, HttpPostedFileBase postedFile)
         {
-            if (ModelState.IsValid)
+            if (postedFile != null)
             {
-                db.Entry(bAIHAT).State = EntityState.Modified;
+                string fileName = Path.GetFileName(postedFile.FileName);
+                if (postedFile.ContentLength < 104857600)
+                {
+                    if (bAIHAT.ImgBH != null)
+                    {
+                        string filename = Path.GetFileNameWithoutExtension(bAIHAT.ImgBH.FileName);
+                        string extension = Path.GetExtension(bAIHAT.ImgBH.FileName);
+                        fileName = fileName + extension;
+                        bAIHAT.hinhbaihat = "/images/nhacsi/" + filename;
+                        bAIHAT.ImgBH.SaveAs(Path.Combine(Server.MapPath("~/images/nhacsi/"), fileName));
+                    }
+
+
+                    PLAYLIST pLAYLIST = db.PLAYLISTs.Find(bAIHAT.idplaylist);
+                    bAIHAT.casi = pLAYLIST.ten;
+
+
+
+                    postedFile.SaveAs(Server.MapPath("/music/" + fileName));
+                    string mainconn = ConfigurationManager.ConnectionStrings["DBcontent"].ConnectionString;
+                    SqlConnection sqlconn = new SqlConnection(mainconn);
+                    string sqlquery = "Update [dbo].[BAIHAT] set @idtheloai=" + bAIHAT.idtheloai + ", @idalbum=" + bAIHAT.idalbum + ",@idplaylist=" + bAIHAT.idplaylist + ",@tenbaihat=" + bAIHAT.tenbaihat + ",@hinhbaihat=" + bAIHAT.hinhbaihat + ",@casi=" + bAIHAT.casi + ",@linkbaihat=" + "/music/" + fileName + ",@lyrics=" + bAIHAT.lyrics + " where @idbaihat=" + bAIHAT.idbaihat + "";
+                    SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
+                    sqlconn.Open();
+                   
+
+                    sqlcomm.ExecuteNonQuery();
+                    sqlconn.Close();
+                    ViewData["Message"] = "Record Saved Successfully!";
+                }
+            }
+            db.Entry(bAIHAT).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-            ViewBag.idalbum = new SelectList(db.ALBUMs, "idalbum", "tenalbum", bAIHAT.idalbum);
-            ViewBag.idplaylist = new SelectList(db.PLAYLISTs, "idplaylist", "ten", bAIHAT.idplaylist);
-            ViewBag.idtheloai = new SelectList(db.THELOAIs, "idtheloai", "tentheloai", bAIHAT.idtheloai);
-            return View(bAIHAT);
         }
         public ActionResult Delete(int? id)
         {
@@ -197,54 +208,5 @@ namespace MUSIC.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
-
-
-
-
-
-
-        /*public static void uploadFile(DriveService _service, string _uploadFile)
-        {
-            if (System.IO.File.Exists(_uploadFile))
-            {
-                var body = new Google.Apis.Drive.v3.Data.File();
-                //File body = new File();
-                body.Name = System.IO.Path.GetFileName(_uploadFile);
-                //body.Description = _descrp;
-                body.MimeType = GetMimeType(_uploadFile);
-                // body.Parents = new List<ParentReference>() { new ParentReference() { Id = _parent } };
-
-                FilesResource.CreateMediaUpload request;
-                try
-                {
-                    using (var stream = new System.IO.FileStream(_uploadFile, System.IO.FileMode.Open))
-                    {
-                        request = _service.Files.Create(body, stream, body.MimeType);
-                        request.Fields = "id";
-                        request.Upload();
-                    }
-                    var file = request.ResponseBody;
-                    var fili = file.Id;
-                }
-                catch (Exception e)
-                {
-
-                }
-            }
-            else
-            {
-
-            }
-        }
-
-        private static string GetMimeType(string fileName)
-        {
-            string mimeType = "application/unknown";
-            string ext = System.IO.Path.GetExtension(fileName).ToLower();
-            Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
-            if (regKey != null && regKey.GetValue("Content Type") != null)
-                mimeType = regKey.GetValue("Content Type").ToString();
-            return mimeType;
-        }*/
     }
 }
