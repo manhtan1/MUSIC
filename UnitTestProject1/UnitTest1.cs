@@ -1,21 +1,22 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using MUSIC.Controllers;
+using MUSIC.Models;
+
 using System.Web.Mvc;
 
 namespace UnitTestProject1
 {
     [TestClass]
-    public class DangNhap
+    public class UnitTest1
     {
         /*private object ViewResult;*/
 
         [TestMethod]
-        public void TestMethod1()
+        public void timkiem()
         {
-            NguoiDungController test = new NguoiDungController();
-            ViewResult obj = (ViewResult)test.DangNhap("ádasd", "dsdsd");
-            Assert.AreEqual("trang chủ", obj.ViewName);
+           
+            Assert.Fail();
         }
         
     }

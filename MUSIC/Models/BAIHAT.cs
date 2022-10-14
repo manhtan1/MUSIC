@@ -69,6 +69,7 @@ namespace MUSIC.Models
         {
             DBcontent db = new DBcontent();
             return db.BAIHATs.SqlQuery("Select * from BAIHAT where lyrics like N'%" + key + "%' or tenbaihat like N'%" + key + "%'").ToList();
+
         }
         public List<BAIHAT> findByid(int? key)
         {
